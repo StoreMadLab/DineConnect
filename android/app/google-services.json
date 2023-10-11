@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "441286006217",
+    "firebase_url": "https://demodine-14f85-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "demodine-14f85",
+    "storage_bucket": "demodine-14f85.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:441286006217:android:808813ccfee54acf5dc418",
+        "android_client_info": {
+          "package_name": "com.dineconnect.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCikWNR6c50yjdnaLjqfOzVaS2WvrvybZM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

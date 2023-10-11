@@ -1,0 +1,55 @@
+name: dineconnect
+description: A new Flutter project.
+version: 1.0.0+1
+environment: 
+  sdk: '>=2.12.0 <3.0.0'
+dependencies: 
+  flutter: 
+    sdk: flutter
+  cached_network_image: ^3.2.1
+  flutter_svg: ^1.1.6
+  pin_code_fields: ^7.3.0
+  intl: ^0.18.0
+  firebase_core: ^2.17.0
+  firebase_auth: ^4.10.1
+  firestore_ref: ^0.14.1
+  firestore_ui: ^1.25.1
+  cloud_firestore: ^4.9.3
+  cupertino_icons: ^1.0.6
+  firebase_storage: ^11.2.8
+  flutter_toastr: ^1.0.3
+  fluttertoast: ^8.2.2
+  firebase_database: ^10.2.7
+dev_dependencies: 
+  flutter_test: 
+    sdk: flutter
+flutter: 
+  uses-material-design: true
+  assets: 
+    - assets/
+    - assets/images/
+  fonts: 
+    - family: Inter
+      fonts: 
+        - asset: assets/fonts/InterRegular.ttf
+          weight: 400
+        - asset: assets/fonts/InterBold.ttf
+          weight: 700
+        - asset: assets/fonts/InterExtraBold.ttf
+          weight: 800
+        - asset: assets/fonts/InterLight.ttf
+          weight: 300
+    - family: Newsreader
+      fonts: 
+        - asset: assets/fonts/NewsreaderRomanBold.ttf
+          weight: 700
+        - asset: assets/fonts/NewsreaderRomanRegular.ttf
+          weight: 400
+        - asset: assets/fonts/NewsreaderRomanSemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/NewsreaderRomanLight.ttf
+          weight: 300
+    - family: Poppins
+      fonts: 
+        - asset: assets/fonts/PoppinsSemiBold.ttf
+          weight: 600
