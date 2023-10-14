@@ -1,4 +1,8 @@
+import 'package:dineconnect/classes/user.dart';
 import 'package:dineconnect/core/app_export.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_database/firebase_database.dart';
 
 import 'package:flutter/material.dart';
 
@@ -14,6 +18,47 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int _expandedDropdownIndex = -1;
 
+  String fullName = ""; // Updated variable name
+  String phoneNumber = "";
+
+  final DatabaseReference _userRef = FirebaseDatabase.instance.ref().child('users');
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  String? uid = "";
+
+  Future<String?> fetchUserDataFromFirebase(String phoneNumber) async {
+    final databaseReference = FirebaseDatabase.instance.ref();
+    final userRef = databaseReference.child('users/$phoneNumber/fullName');
+
+    try {
+      DatabaseEvent databaseEvent = await userRef.once();
+      if (databaseEvent.snapshot.value != null) {
+        return databaseEvent.snapshot.value.toString();
+      } else {
+        return null;
+      }
+    } catch (e) {
+      print('Error fetching user data: $e');
+      return null;
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    // Initialize and listen to the user data stream here.
+    final user = _auth.currentUser;
+    final phoneNumber = user!.phoneNumber;
+    fetchUserDataFromFirebase(phoneNumber!).then((String? name) {
+      if (name != null) {
+        setState(() {
+          fullName = name; // Update the fullName variable
+        });
+      } else {
+        // Handle the case where user data is not found.
+      }
+    });
+  }
+
   void toggleDropdown(int index) {
     setState(() {
       if (_expandedDropdownIndex == index) {
@@ -26,59 +71,58 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-
     final screenHeight = MediaQuery.of(context).size.height;
 
     mediaQueryData = MediaQuery.of(context);
     return Scaffold(
-          resizeToAvoidBottomInset: true,
-          body: SingleChildScrollView(
-            physics: AlwaysScrollableScrollPhysics(),
-            child: Container(
-              width: double.maxFinite,
-              padding: EdgeInsets.only(top: 65.v),
-              child: Column(
-                children: [
-                  Container(
-                    margin: EdgeInsets.only(right: 1.h),
-                    padding: EdgeInsets.symmetric(vertical: 10.v),
-                    decoration: AppDecoration.gradientIndigoToBlue,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.only(
-                              left: 9.h, top: 6.v, right: 16.h),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Padding(
-                                padding: EdgeInsets.only(
-                                    top: 1.v, bottom: 7.v),
-                                child: Text(
-                                  "Username ",
-                                  style: theme
-                                      .textTheme.headlineLarge,
-                                ),
-                              ),
-                              CustomImageView(
-                                svgPath: ImageConstant.imgEmojimanoffice,
-                                height: 41.v,
-                                width: 47.h,
-                                onTap: () {
-                                  onTapImgEmojimanoffice(context);
-                                },
-                              ),
-                            ],
+      resizeToAvoidBottomInset: true,
+      body: SingleChildScrollView(
+        physics: AlwaysScrollableScrollPhysics(),
+        child: Container(
+          width: double.maxFinite,
+          padding: EdgeInsets.only(top: 65.v),
+          child: Column(
+            children: [
+              Container(
+                margin: EdgeInsets.only(right: 1.h),
+                padding: EdgeInsets.symmetric(vertical: 10.v),
+                decoration: AppDecoration.gradientIndigoToBlue,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.only(
+                          left: 9.h, top: 6.v, right: 16.h),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.only(
+                                top: 1.v, bottom: 7.v),
+                            child: Text(
+                              fullName, // Display full name here
+                              style: theme
+                                  .textTheme.headlineLarge,
+                            ),
                           ),
-                        ),
-                        SizedBox(height: 46.v),
-                        Divider(),
-                      ],
+                          CustomImageView(
+                            svgPath: ImageConstant.imgEmojimanoffice,
+                            height: 41.v,
+                            width: 47.h,
+                            onTap: () {
+                              onTapImgEmojimanoffice(context);
+                            },
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                  SizedBox(height: 20.v,),
+                    SizedBox(height: 46.v),
+                    Divider(),
+                  ],
+                ),
+              ),
+              SizedBox(height: 20.v,),
 
                   CustomExpandingDropdown(
                     isExpanded: _expandedDropdownIndex == 0,

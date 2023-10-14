@@ -193,7 +193,6 @@ class LoginScreen extends StatelessWidget {
     DatabaseReference usersRef = FirebaseDatabase.instance.ref().child("users");
     DatabaseEvent snapshot = await usersRef.child(phone).once();
 
-    try{
       if (snapshot.snapshot.value != null) {
         // User exists, send OTP
         _auth.verifyPhoneNumber(
@@ -206,7 +205,7 @@ class LoginScreen extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => opt_screen(verificationid: verificationId),
+                builder: (context) => OtpScreen(verificationId: verificationId, phoneNumber: phone,),
               ),
             );
           },
@@ -218,9 +217,6 @@ class LoginScreen extends StatelessWidget {
         // User doesn't exist, navigate to create account screen
         Navigator.pushNamed(context, AppRoutes.createAccountScreen);
       }
-    }catch(e){
-      print(e.toString());
-    }
   }
 
 

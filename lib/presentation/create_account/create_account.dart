@@ -191,15 +191,12 @@ class CreateAccountScreen extends StatelessWidget {
     name = fullNameController.text;
     phone = phoneNumberController.text;
     location = locationController.text;
-    print("test3");
+
     if (_formKey.currentState!.validate()) {
-      print("test1");
       DatabaseReference usersRef = FirebaseDatabase.instance.ref().child("users");
       DatabaseEvent databaseEvent = await usersRef.child(phone).once();
-      print("test1");
       if (databaseEvent.snapshot.value != null) {
         // User with the phone number already exists
-        print("test2");
         Utils().toastMessage("Account already registered");
         Navigator.pushNamed(context, AppRoutes.loginScreen); // Navigate to login screen
       } else {
@@ -221,7 +218,7 @@ class CreateAccountScreen extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => opt_screen(verificationid: verificationId),
+                  builder: (context) => OtpScreen(verificationId: verificationId, phoneNumber: phone,),
                 ),
               );
             },
