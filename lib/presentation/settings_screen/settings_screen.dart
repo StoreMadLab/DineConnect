@@ -2,18 +2,43 @@ import 'package:dineconnect/core/app_export.dart';
 import 'package:dineconnect/widgets/custom_icon_button.dart';
 import 'package:dineconnect/widgets/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
+import 'package:dineconnect/services/firebase_service.dart';
 
 // ignore_for_file: must_be_immutable
-class AndroidLargeNineScreen extends StatelessWidget {
-  AndroidLargeNineScreen({Key? key}) : super(key: key);
+class SettingsScreen extends StatelessWidget {
+  SettingsScreen({Key? key}) : super(key: key);
+
+  String fullName = "";
+  String phoneNumber = "";
+  String location = "";
+
+  FirebaseService firebaseService = FirebaseService();
 
   TextEditingController userNameController = TextEditingController();
 
   TextEditingController phoneNumberController = TextEditingController();
 
+  TextEditingController locationController = TextEditingController();
+
+
+
   @override
   Widget build(BuildContext context) {
     mediaQueryData = MediaQuery.of(context);
+
+    phoneNumber = firebaseService.getPhoneNumber()!;
+    userNameController.text = fullName;
+    phoneNumberController.text = phoneNumber;
+    locationController.text = location;
+
+    //fetch user data
+    firebaseService.fetchUserData(phoneNumber).then((String? name){
+      fullName=name!;
+    });
+    firebaseService.fetchLocation(phoneNumber).then((String? loc){
+      location=loc!;
+    });
+
     return SafeArea(
         child: Scaffold(
             resizeToAvoidBottomInset: false,
@@ -96,43 +121,78 @@ class AndroidLargeNineScreen extends StatelessWidget {
                                     Padding(
                                         padding: EdgeInsets.only(
                                             left: 4.h, top: 27.v),
-                                        child: Text("Username",
+                                        child: Text("Full Name",
                                             style: theme.textTheme.titleLarge)),
                                     CustomTextFormField(
                                         controller: userNameController,
+                                        textStyle: TextStyle(
+                                            color: Colors.black,
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold,
+                                        ),
                                         margin: EdgeInsets.only(
-                                            top: 11.v, right: 42.h),
+                                            top: 11.v, right: 15.h),
                                         borderDecoration:
                                             TextFormFieldStyleHelper
                                                 .fillOnPrimaryContainer,
                                         fillColor: theme
                                             .colorScheme.onPrimaryContainer),
                                     SizedBox(height: 14.v),
-                                    Text("Phone number",
-                                        style: theme.textTheme.titleLarge),
+                                    Padding(
+                                        padding: EdgeInsets.only(
+                                            left: 4.h, top: 27.v),
+                                        child: Text("Phone Number",
+                                            style: theme.textTheme.titleLarge)),
                                     CustomTextFormField(
                                         controller: phoneNumberController,
+                                        textStyle: TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold,
+                                        ),
                                         margin: EdgeInsets.only(
-                                            top: 12.v, right: 43.h),
+                                            top: 12.v, right: 15.h),
                                         textInputAction: TextInputAction.done,
                                         borderDecoration:
                                             TextFormFieldStyleHelper
                                                 .fillOnPrimaryContainer,
                                         fillColor: theme
                                             .colorScheme.onPrimaryContainer),
+                                    SizedBox(height: 14.v),
                                     Padding(
                                         padding: EdgeInsets.only(
-                                            left: 7.h, top: 14.v),
+                                            left: 4.h, top: 27.v),
                                         child: Text("Location",
                                             style: theme.textTheme.titleLarge)),
+                                    CustomTextFormField(
+                                        controller: locationController,
+                                        textStyle: TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                        margin: EdgeInsets.only(
+                                            top: 12.v, right: 15.h),
+                                        textInputAction: TextInputAction.done,
+                                        borderDecoration:
+                                        TextFormFieldStyleHelper
+                                            .fillOnPrimaryContainer,
+                                        fillColor: theme
+                                            .colorScheme.onPrimaryContainer),
                                     SizedBox(height: 11.v),
-                                    Container(
-                                        height: 17.v,
-                                        width: 189.h,
-                                        decoration: BoxDecoration(
-                                            color: theme.colorScheme
-                                                .onPrimaryContainer)),
-                                    SizedBox(height: 11.v)
+                                    Center(
+                                      child: ElevatedButton(
+                                          onPressed: (){
+                                            updateUserData();
+                                          },
+                                          child:Text("Edit"),
+                                        style: ButtonStyle(
+                                          backgroundColor: MaterialStateProperty.all<Color>(Colors.red[300]!),
+                                          minimumSize: MaterialStateProperty.all<Size>(Size(150, 50)),
+                                        ),
+
+                                      ),
+                                    ),
                                   ])))
                     ]))));
   }
@@ -143,5 +203,23 @@ class AndroidLargeNineScreen extends StatelessWidget {
   /// to navigate back to the previous screen.
   onTapImgArrowleftone(BuildContext context) {
     Navigator.pop(context);
+  }
+  void updateUserData() {
+    // Get the updated values from the text controllers
+    String updatedFullName = userNameController.text;
+    String updatedLocation = locationController.text;
+
+    // Check if the data has been changed
+    if (updatedFullName != fullName) {
+      // Update full name in the database
+      firebaseService.updateFullName(phoneNumber, updatedFullName);
+      fullName = updatedFullName; // Update the displayed value
+    }
+
+    if (updatedLocation != location) {
+      // Update location in the database
+      firebaseService.updateLocation(phoneNumber, updatedLocation);
+      location = updatedLocation; // Update the displayed value
+    }
   }
 }

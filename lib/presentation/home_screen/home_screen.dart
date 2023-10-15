@@ -5,7 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 
 import 'package:flutter/material.dart';
-
+import 'package:dineconnect/services/firebase_service.dart';
 import '../../widgets/custom_expanding_button.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -18,28 +18,30 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int _expandedDropdownIndex = -1;
 
+  FirebaseService firebaseService = FirebaseService();
+
   String fullName = ""; // Updated variable name
   String phoneNumber = "";
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
   String? uid = "";
 
-  Future<String?> fetchUserDataFromFirebase(String phoneNumber) async {
-    final databaseReference = FirebaseDatabase.instance.ref();
-    final userRef = databaseReference.child('users/$phoneNumber/fullName');
-
-    try {
-      DatabaseEvent databaseEvent = await userRef.once();
-      if (databaseEvent.snapshot.value != null) {
-        return databaseEvent.snapshot.value.toString();
-      } else {
-        return null;
-      }
-    } catch (e) {
-      print('Error fetching user data: $e');
-      return null;
-    }
-  }
+  // Future<String?> fetchUserDataFromFirebase(String phoneNumber) async {
+  //   final databaseReference = FirebaseDatabase.instance.ref();
+  //   final userRef = databaseReference.child('users/$phoneNumber/fullName');
+  //
+  //   try {
+  //     DatabaseEvent databaseEvent = await userRef.once();
+  //     if (databaseEvent.snapshot.value != null) {
+  //       return databaseEvent.snapshot.value.toString();
+  //     } else {
+  //       return null;
+  //     }
+  //   } catch (e) {
+  //     print('Error fetching user data: $e');
+  //     return null;
+  //   }
+  // }
 
   @override
   void initState() {
@@ -47,7 +49,7 @@ class _HomeScreenState extends State<HomeScreen> {
     // Initialize and listen to the user data stream here.
     final user = _auth.currentUser;
     final phoneNumber = user!.phoneNumber;
-    fetchUserDataFromFirebase(phoneNumber!).then((String? name) {
+    firebaseService.fetchUserData(phoneNumber!).then((String? name) {
       if (name != null) {
         setState(() {
           fullName = name; // Update the fullName variable
@@ -231,6 +233,6 @@ class _HomeScreenState extends State<HomeScreen> {
   /// When the action is triggered, this function uses the [Navigator] widget
   /// to push the named route for the androidLargeNineScreen.
   onTapImgEmojimanoffice(BuildContext context) {
-    Navigator.pushNamed(context, AppRoutes.androidLargeNineScreen);
+    Navigator.pushNamed(context, AppRoutes.settingsScreen);
   }
 }

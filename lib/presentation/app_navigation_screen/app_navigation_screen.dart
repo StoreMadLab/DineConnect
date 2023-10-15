@@ -912,7 +912,7 @@ class AppNavigationScreen extends StatelessWidget {
   /// When the action is triggered, this function uses the [Navigator] widget
   /// to push the named route for the androidLargeNineScreen.
   onTapAndroidLargeNine(BuildContext context) {
-    Navigator.pushNamed(context, AppRoutes.androidLargeNineScreen);
+    Navigator.pushNamed(context, AppRoutes.settingsScreen);
   }
 
   /// Navigates to the androidLargeThirtyOneScreen when the action is triggered.

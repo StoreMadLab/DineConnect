@@ -69,82 +69,87 @@ class PostAJobScreen extends StatelessWidget {
             body: Container(
                 width: double.maxFinite,
                 padding: EdgeInsets.symmetric(vertical: 4.v),
-                child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                          padding: EdgeInsets.only(left: 37.h, top: 10.v),
-                          child: Text("Hotel Name",
-                              style: CustomTextStyles
-                                  .titleMediumNewsreaderBlue800)),
-                      CustomTextFormField(
-                          controller: nameController,
-                          margin: EdgeInsets.only(
-                              left: 37.h, top: 8.v, right: 18.h),
-                          alignment: Alignment.centerRight),
-                      Padding(
-                          padding: EdgeInsets.only(left: 40.h, top: 6.v),
-                          child: Text("Role",
-                              style: CustomTextStyles.titleLargeBlue800)),
-                      CustomTextFormField(
-                          controller: edittextController,
-                          margin: EdgeInsets.only(
-                              left: 40.h, top: 11.v, right: 16.h),
-                          alignment: Alignment.centerRight),
-                      Padding(
-                          padding: EdgeInsets.only(left: 37.h, top: 16.v),
-                          child: Text("Description",
-                              style: CustomTextStyles.titleLargeBlue800)),
-                      CustomTextFormField(
-                          controller: edittextoneController,
-                          margin: EdgeInsets.only(
-                              left: 37.h, top: 6.v, right: 21.h),
-                          alignment: Alignment.center,
-                          borderDecoration:
-                              TextFormFieldStyleHelper.fillPrimary2,
-                          fillColor:
-                              theme.colorScheme.primary.withOpacity(0.67)),
-                      Padding(
-                          padding: EdgeInsets.only(left: 37.h, top: 16.v),
-                          child: Text("Salary",
-                              style: CustomTextStyles.titleLargeBlue800)),
-                      CustomTextFormField(
-                          controller: edittexttwoController,
-                          margin: EdgeInsets.only(
-                              left: 37.h, top: 9.v, right: 19.h),
-                          alignment: Alignment.center),
-                      Padding(
-                          padding: EdgeInsets.only(left: 36.h, top: 17.v),
-                          child: Text("Working Hours",
-                              style: CustomTextStyles.titleLargeBlue800)),
-                      CustomTextFormField(
-                          controller: edittextthreeController,
-                          margin: EdgeInsets.only(
-                              left: 35.h, top: 9.v, right: 21.h),
-                          alignment: Alignment.center),
-                      Padding(
-                          padding: EdgeInsets.only(left: 37.h, top: 10.v),
-                          child: Text("Location",
-                              style: CustomTextStyles.titleLargeBlue800)),
-                      CustomTextFormField(
-                          controller: locationController,
-                          margin: EdgeInsets.only(
-                              left: 36.h, top: 6.v, right: 20.h),
-                          textInputAction: TextInputAction.done,
-                          alignment: Alignment.center),
-                      SizedBox(height: 18.v),
-                      Divider(),
-                      SizedBox(height: 4.v),
-                      CustomElevatedButton(
-                          height: 40.v,
-                          width: 135.h,
-                          text: "SUBMIT",
-                          buttonTextStyle:
-                              CustomTextStyles.titleMediumNewsreader,
-                          onTap: () {
-                            onTapSubmit(context);
-                          })
-                    ])),
+                child: SingleChildScrollView(
+                  child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                            padding: EdgeInsets.only(left: 40.h, top: 10.v),
+                            child: Text("Hotel Name",
+                                style: CustomTextStyles
+                                    .titleLargeBlue800)),
+                        CustomTextFormField(
+                            controller: nameController,
+                            margin: EdgeInsets.only(
+                                left: 36.h, top: 10.v, right: 19.h,bottom: 10.v),
+                            alignment: Alignment.centerRight),
+                        Padding(
+                            padding: EdgeInsets.only(left: 40.h, top: 10.v),
+                            child: Text("Role",
+                                style: CustomTextStyles.titleLargeBlue800)),
+                        CustomTextFormField(
+                            controller: edittextController,
+                            margin: EdgeInsets.only(
+                                left: 36.h, top: 10.v, right: 19.h),
+                            alignment: Alignment.centerRight),
+                        Padding(
+                            padding: EdgeInsets.only(left: 40.h, top: 10.v),
+                            child: Text("Description",
+                                style: CustomTextStyles.titleLargeBlue800)),
+                        CustomTextFormField(
+                            controller: edittextoneController,
+                            margin: EdgeInsets.only(
+                                left: 36.h, top: 10.v, right: 19.h),
+                            alignment: Alignment.center,
+                            borderDecoration:
+                                TextFormFieldStyleHelper.fillPrimary2,
+                            fillColor:
+                                theme.colorScheme.primary.withOpacity(0.67)),
+                        Padding(
+                            padding: EdgeInsets.only(left: 40.h, top: 10.v),
+                            child: Text("Salary",
+                                style: CustomTextStyles.titleLargeBlue800)),
+                        CustomTextFormField(
+                            controller: edittexttwoController,
+                            margin: EdgeInsets.only(
+                                left: 36.h, top: 10.v, right: 19.h),
+                            alignment: Alignment.center),
+                        Padding(
+                            padding: EdgeInsets.only(left: 40.h, top: 10.v),
+                            child: Text("Working Hours",
+                                style: CustomTextStyles.titleLargeBlue800)),
+                        CustomTextFormField(
+                            controller: edittextthreeController,
+                            margin: EdgeInsets.only(
+                                left: 36.h, top: 10.v, right: 19.h),
+                            alignment: Alignment.center),
+                        Padding(
+                            padding: EdgeInsets.only(left: 40.h, top: 10.v),
+                            child: Text("Location",
+                                style: CustomTextStyles.titleLargeBlue800)),
+                        CustomTextFormField(
+                            controller: locationController,
+                            margin: EdgeInsets.only(
+                                left: 36.h, top: 10.v, right: 19.h),
+                            textInputAction: TextInputAction.done,
+                            alignment: Alignment.center),
+                        SizedBox(height: 15.v),
+                        Divider(),
+                        SizedBox(height: 4.v),
+                        CustomElevatedButton(
+                            height: 40.v,
+                            width: 135.h,
+                            text: "SUBMIT",
+                            alignment: Alignment.center,
+                            buttonTextStyle:
+                                CustomTextStyles.titleMediumNewsreader,
+                            onTap: () {
+                              onTapSubmit(context);
+                            }),
+                        SizedBox(height: 4.v),
+                        Divider(),
+                      ]),
+                )),
             bottomNavigationBar:
                 CustomBottomBar(onChanged: (BottomBarEnum type) {
               Navigator.pushNamed(

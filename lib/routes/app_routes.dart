@@ -14,7 +14,7 @@ import 'package:dineconnect/presentation/application_screen/application_screen.d
 import 'package:dineconnect/presentation/login/login.dart';
 // import 'package:dineconnect/presentation/opt_screen/opt_screen.dart';
 import 'package:dineconnect/presentation/home_screen/home_screen.dart';
-import 'package:dineconnect/presentation/android_large_nine_screen/android_large_nine_screen.dart';
+import 'package:dineconnect/presentation/settings_screen/settings_screen.dart';
 import 'package:dineconnect/presentation/android_large_thirty_one_screen/android_large_thirty_one_screen.dart';
 import 'package:dineconnect/presentation/android_large_thirty_screen/android_large_thirty_screen.dart';
 import 'package:dineconnect/presentation/android_large_sixteen_screen/android_large_sixteen_screen.dart';
@@ -75,7 +75,7 @@ class AppRoutes {
   static const String homeScreen =
       '/android_large_twentyfive_screen';
 
-  static const String androidLargeNineScreen = '/android_large_nine_screen';
+  static const String settingsScreen = '/android_large_nine_screen';
 
   static const String androidLargeThirtyOneScreen =
       '/android_large_thirty_one_screen';
@@ -113,7 +113,7 @@ class AppRoutes {
     loginScreen: (context) => LoginScreen(),
     // androidLargeTwentyfourScreen: (context) => opt_screen(verificationid:verificationid ,),
     homeScreen: (context) => HomeScreen(),
-    androidLargeNineScreen: (context) => AndroidLargeNineScreen(),
+    settingsScreen: (context) => SettingsScreen(),
     androidLargeThirtyOneScreen: (context) => AndroidLargeThirtyOneScreen(),
     androidLargeThirtyScreen: (context) => AndroidLargeThirtyScreen(),
     menuScreen: (context) => AndroidLargeSixteenScreen(),
