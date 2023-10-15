@@ -368,7 +368,7 @@ class AndroidLargeTwentysixScreen extends StatelessWidget {
   /// When the action is triggered, this function uses the [Navigator] widget
   /// to push the named route for the androidLargeFiveScreen.
   onTapTxtPostajob(BuildContext context) {
-    Navigator.pushNamed(context, AppRoutes.androidLargeFiveScreen);
+    Navigator.pushNamed(context, AppRoutes.postAJobScreen);
   }
 
   /// Navigates to the androidLargeTwentynineOneScreen when the action is triggered.
@@ -377,7 +377,7 @@ class AndroidLargeTwentysixScreen extends StatelessWidget {
   /// When the action is triggered, this function uses the [Navigator] widget
   /// to push the named route for the androidLargeTwentynineOneScreen.
   onTapTxtManagejob(BuildContext context) {
-    Navigator.pushNamed(context, AppRoutes.androidLargeTwentynineOneScreen);
+    Navigator.pushNamed(context, AppRoutes.manageJobsScreen);
   }
 
   /// Navigates to the androidLargeSixScreen when the action is triggered.
@@ -386,7 +386,7 @@ class AndroidLargeTwentysixScreen extends StatelessWidget {
   /// When the action is triggered, this function uses the [Navigator] widget
   /// to push the named route for the androidLargeSixScreen.
   onTapTxtApplications(BuildContext context) {
-    Navigator.pushNamed(context, AppRoutes.androidLargeSixScreen);
+    Navigator.pushNamed(context, AppRoutes.applicationScreen);
   }
 
   /// Navigates to the androidLargeTwentysevenScreen when the action is triggered.
@@ -395,7 +395,7 @@ class AndroidLargeTwentysixScreen extends StatelessWidget {
   /// When the action is triggered, this function uses the [Navigator] widget
   /// to push the named route for the androidLargeTwentysevenScreen.
   onTapIconExamM(BuildContext context) {
-    Navigator.pushNamed(context, AppRoutes.androidLargeTwentysevenScreen);
+    Navigator.pushNamed(context, AppRoutes.ordersScreen);
   }
 
   /// Navigates to the androidLargeTwentysixOneScreen when the action is triggered.
@@ -404,6 +404,6 @@ class AndroidLargeTwentysixScreen extends StatelessWidget {
   /// When the action is triggered, this function uses the [Navigator] widget
   /// to push the named route for the androidLargeTwentysixOneScreen.
   onTapIconExamM1(BuildContext context) {
-    Navigator.pushNamed(context, AppRoutes.androidLargeTwentysixOneScreen);
+    Navigator.pushNamed(context, AppRoutes.applicationHistoryScreen);
   }
 }

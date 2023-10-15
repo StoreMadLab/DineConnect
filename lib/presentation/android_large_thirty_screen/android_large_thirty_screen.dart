@@ -176,6 +176,6 @@ class AndroidLargeThirtyScreen extends StatelessWidget {
   /// When the action is triggered, this function uses the [Navigator] widget
   /// to push the named route for the androidLargeTwentynineOneScreen.
   onTapEdit(BuildContext context) {
-    Navigator.pushNamed(context, AppRoutes.androidLargeTwentynineOneScreen);
+    Navigator.pushNamed(context, AppRoutes.manageJobsScreen);
   }
 }

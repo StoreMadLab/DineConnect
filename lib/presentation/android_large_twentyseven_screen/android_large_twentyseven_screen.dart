@@ -317,7 +317,7 @@ class AndroidLargeTwentysevenScreen extends StatelessWidget {
   /// When the action is triggered, this function uses the [Navigator] widget
   /// to push the named route for the androidLargeFourScreen.
   onTapTxtBrowsejobs(BuildContext context) {
-    Navigator.pushNamed(context, AppRoutes.androidLargeFourScreen);
+    Navigator.pushNamed(context, AppRoutes.browseJobScreen);
   }
 
   /// Navigates to the androidLargeTwentysixOneScreen when the action is triggered.
@@ -326,6 +326,6 @@ class AndroidLargeTwentysevenScreen extends StatelessWidget {
   /// When the action is triggered, this function uses the [Navigator] widget
   /// to push the named route for the androidLargeTwentysixOneScreen.
   onTapIconExamM1(BuildContext context) {
-    Navigator.pushNamed(context, AppRoutes.androidLargeTwentysixOneScreen);
+    Navigator.pushNamed(context, AppRoutes.applicationHistoryScreen);
   }
 }

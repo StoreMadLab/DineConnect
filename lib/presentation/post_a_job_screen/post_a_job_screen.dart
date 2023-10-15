@@ -6,12 +6,13 @@ import 'package:dineconnect/widgets/app_bar/appbar_subtitle.dart';
 import 'package:dineconnect/widgets/app_bar/custom_app_bar.dart';
 import 'package:dineconnect/widgets/custom_bottom_bar.dart';
 import 'package:dineconnect/widgets/custom_elevated_button.dart';
+import 'package:dineconnect/widgets/custom_header.dart';
 import 'package:dineconnect/widgets/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
 
 // ignore_for_file: must_be_immutable
-class AndroidLargeFiveScreen extends StatelessWidget {
-  AndroidLargeFiveScreen({Key? key}) : super(key: key);
+class PostAJobScreen extends StatelessWidget {
+  PostAJobScreen({Key? key}) : super(key: key);
 
   GlobalKey<NavigatorState> navigatorKey = GlobalKey();
 
@@ -33,28 +34,38 @@ class AndroidLargeFiveScreen extends StatelessWidget {
     return SafeArea(
         child: Scaffold(
             resizeToAvoidBottomInset: false,
-            appBar: CustomAppBar(
-                height: 105.v,
-                centerTitle: true,
-                title: Column(children: [
-                  Padding(
-                      padding: EdgeInsets.only(left: 10.h, right: 205.h),
-                      child: Row(children: [
-                        AppbarImage1(
-                            svgPath: ImageConstant.imgArrowleft,
-                            onTap: () {
-                              onTapArrowleftone(context);
-                            }),
-                        AppbarSubtitle(
-                            text: "Post a Job",
-                            margin: EdgeInsets.only(left: 7.h, bottom: 3.v))
-                      ])),
-                  SizedBox(height: 9.v),
-                  Align(
-                      alignment: Alignment.centerLeft,
-                      child: SizedBox(width: 355.h, child: Divider()))
-                ]),
-                styleType: Style.bgFill_1),
+            appBar: AppBar(
+              title: Text('Post a Job',
+              style: TextStyle(
+                color: Colors.blueAccent[700],
+                  fontWeight:FontWeight.bold,
+                fontSize: 24.0,
+                ),
+                textAlign: TextAlign.left,
+              ),
+            ),
+            // appBar: CustomAppBar(
+            //     height: 105.v,
+            //     centerTitle: true,
+            //     title: Column(children: [
+            //       Padding(
+            //           padding: EdgeInsets.only(left: 10.h, right: 205.h),
+            //           child: Row(children: [
+            //             AppbarImage1(
+            //                 svgPath: ImageConstant.imgArrowleft,
+            //                 onTap: () {
+            //                   onTapArrowleftone(context);
+            //                 }),
+            //             AppbarSubtitle(
+            //                 text: "Post a Job",
+            //                 margin: EdgeInsets.only(left: 7.h, bottom: 3.v))
+            //           ])),
+            //       SizedBox(height: 9.v),
+            //       Align(
+            //           alignment: Alignment.centerLeft,
+            //           child: SizedBox(width: 355.h, child: Divider()))
+            //     ]),
+            //     styleType: Style.bgFill_1),
             body: Container(
                 width: double.maxFinite,
                 padding: EdgeInsets.symmetric(vertical: 4.v),
@@ -183,6 +194,6 @@ class AndroidLargeFiveScreen extends StatelessWidget {
   /// When the action is triggered, this function uses the [Navigator] widget
   /// to push the named route for the androidLargeTwentynineOneScreen.
   onTapSubmit(BuildContext context) {
-    Navigator.pushNamed(context, AppRoutes.androidLargeTwentynineOneScreen);
+    Navigator.pushNamed(context, AppRoutes.manageJobsScreen);
   }
 }

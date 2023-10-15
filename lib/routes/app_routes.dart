@@ -8,9 +8,9 @@ import 'package:dineconnect/presentation/create_account/create_account.dart';
 import 'package:dineconnect/presentation/android_large_twentysix_one_screen/android_large_twentysix_one_screen.dart';
 import 'package:dineconnect/presentation/android_large_seventeen_screen/android_large_seventeen_screen.dart';
 import 'package:dineconnect/presentation/android_large_twentysix_screen/android_large_twentysix_screen.dart';
-import 'package:dineconnect/presentation/android_large_five_screen/android_large_five_screen.dart';
-import 'package:dineconnect/presentation/android_large_twentynine_one_screen/android_large_twentynine_one_screen.dart';
-import 'package:dineconnect/presentation/android_large_six_screen/android_large_six_screen.dart';
+import 'package:dineconnect/presentation/post_a_job_screen/post_a_job_screen.dart';
+import 'package:dineconnect/presentation/manage_jobs_screen/manage_jobs_screen.dart';
+import 'package:dineconnect/presentation/application_screen/application_screen.dart';
 import 'package:dineconnect/presentation/login/login.dart';
 // import 'package:dineconnect/presentation/opt_screen/opt_screen.dart';
 import 'package:dineconnect/presentation/home_screen/home_screen.dart';
@@ -35,10 +35,10 @@ class AppRoutes {
   static const String androidLargeThirtyoneContainerScreen =
       '/android_large_thirtyone_container_screen';
 
-  static const String androidLargeTwentysevenScreen =
+  static const String ordersScreen =
       '/android_large_twentyseven_screen';
 
-  static const String androidLargeFourScreen = '/android_large_four_screen';
+  static const String browseJobScreen = '/android_large_four_screen';
 
   static const String androidLargeTwentyeightScreen =
       '/android_large_twentyeight_screen';
@@ -48,7 +48,7 @@ class AppRoutes {
 
   static const String createAccountScreen = '/android_large_three_screen';
 
-  static const String androidLargeTwentysixOneScreen =
+  static const String applicationHistoryScreen =
       '/android_large_twentysix_one_screen';
 
   static const String androidLargeFifteenPage = '/android_large_fifteen_page';
@@ -59,12 +59,12 @@ class AppRoutes {
   static const String androidLargeTwentysixScreen =
       '/android_large_twentysix_screen';
 
-  static const String androidLargeFiveScreen = '/android_large_five_screen';
+  static const String postAJobScreen = '/android_large_five_screen';
 
-  static const String androidLargeTwentynineOneScreen =
+  static const String manageJobsScreen =
       '/android_large_twentynine_one_screen';
 
-  static const String androidLargeSixScreen = '/android_large_six_screen';
+  static const String applicationScreen = '/android_large_six_screen';
 
   static const String loginScreen =
       '/android_large_twentythree_screen';
@@ -82,13 +82,13 @@ class AppRoutes {
 
   static const String androidLargeThirtyScreen = '/android_large_thirty_screen';
 
-  static const String androidLargeSixteenScreen =
+  static const String menuScreen =
       '/android_large_sixteen_screen';
 
-  static const String androidLargeEighteenScreen =
+  static const String employeesScreen =
       '/android_large_eighteen_screen';
 
-  static const String androidLargeNineteenScreen =
+  static const String vendorsScreen =
       '/android_large_nineteen_screen';
 
   static const String appNavigationScreen = '/app_navigation_screen';
@@ -97,28 +97,28 @@ class AppRoutes {
     launcherScreen: (context) => LauncherScreen(),
     androidLargeThirtyoneContainerScreen: (context) =>
         AndroidLargeThirtyoneContainerScreen(),
-    androidLargeTwentysevenScreen: (context) => AndroidLargeTwentysevenScreen(),
-    androidLargeFourScreen: (context) => AndroidLargeFourScreen(),
+    ordersScreen: (context) => AndroidLargeTwentysevenScreen(),
+    browseJobScreen: (context) => AndroidLargeFourScreen(),
     androidLargeTwentyeightScreen: (context) => AndroidLargeTwentyeightScreen(),
     androidLargeTwentynineScreen: (context) => AndroidLargeTwentynineScreen(),
     createAccountScreen: (context) => CreateAccountScreen(),
-    androidLargeTwentysixOneScreen: (context) =>
+    applicationHistoryScreen: (context) =>
         AndroidLargeTwentysixOneScreen(),
     androidLargeSeventeenScreen: (context) => AndroidLargeSeventeenScreen(),
     androidLargeTwentysixScreen: (context) => AndroidLargeTwentysixScreen(),
-    androidLargeFiveScreen: (context) => AndroidLargeFiveScreen(),
-    androidLargeTwentynineOneScreen: (context) =>
-        AndroidLargeTwentynineOneScreen(),
-    androidLargeSixScreen: (context) => AndroidLargeSixScreen(),
+    postAJobScreen: (context) => PostAJobScreen(),
+    manageJobsScreen: (context) =>
+        ManageJobsScreen(),
+    applicationScreen: (context) => ApplicationScreen(),
     loginScreen: (context) => LoginScreen(),
     // androidLargeTwentyfourScreen: (context) => opt_screen(verificationid:verificationid ,),
     homeScreen: (context) => HomeScreen(),
     androidLargeNineScreen: (context) => AndroidLargeNineScreen(),
     androidLargeThirtyOneScreen: (context) => AndroidLargeThirtyOneScreen(),
     androidLargeThirtyScreen: (context) => AndroidLargeThirtyScreen(),
-    androidLargeSixteenScreen: (context) => AndroidLargeSixteenScreen(),
-    androidLargeEighteenScreen: (context) => AndroidLargeEighteenScreen(),
-    androidLargeNineteenScreen: (context) => AndroidLargeNineteenScreen(),
+    menuScreen: (context) => AndroidLargeSixteenScreen(),
+    employeesScreen: (context) => AndroidLargeEighteenScreen(),
+    vendorsScreen: (context) => AndroidLargeNineteenScreen(),
     appNavigationScreen: (context) => AppNavigationScreen()
   };
 }

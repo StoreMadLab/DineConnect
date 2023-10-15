@@ -1,4 +1,4 @@
-import '../android_large_twentynine_one_screen/widgets/listmainchef1_item_widget.dart';
+import '../manage_jobs_screen/widgets/listmainchef1_item_widget.dart';
 import 'package:dineconnect/core/app_export.dart';
 import 'package:dineconnect/presentation/android_large_fifteen_page/android_large_fifteen_page.dart';
 import 'package:dineconnect/presentation/android_large_thirtyone_page/android_large_thirtyone_page.dart';
@@ -9,8 +9,8 @@ import 'package:dineconnect/widgets/custom_bottom_bar.dart';
 import 'package:flutter/material.dart';
 
 // ignore_for_file: must_be_immutable
-class AndroidLargeTwentynineOneScreen extends StatelessWidget {
-  AndroidLargeTwentynineOneScreen({Key? key}) : super(key: key);
+class ManageJobsScreen extends StatelessWidget {
+  ManageJobsScreen({Key? key}) : super(key: key);
 
   GlobalKey<NavigatorState> navigatorKey = GlobalKey();
 

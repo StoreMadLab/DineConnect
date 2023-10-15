@@ -4,7 +4,6 @@ import 'package:dineconnect/widgets/app_bar/appbar_image.dart';
 import 'package:dineconnect/widgets/app_bar/appbar_title.dart';
 import 'package:dineconnect/widgets/app_bar/custom_app_bar.dart';
 import 'package:dineconnect/widgets/custom_elevated_button.dart';
-import 'package:dineconnect/widgets/custom_pin_code_text_field.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 

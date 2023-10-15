@@ -427,7 +427,7 @@ class AndroidLargeTwentysixOneScreen extends StatelessWidget {
   /// When the action is triggered, this function uses the [Navigator] widget
   /// to push the named route for the androidLargeTwentysevenScreen.
   onTapIconExamM1(BuildContext context) {
-    Navigator.pushNamed(context, AppRoutes.androidLargeTwentysevenScreen);
+    Navigator.pushNamed(context, AppRoutes.ordersScreen);
   }
 
   /// Navigates to the androidLargeEighteenScreen when the action is triggered.
@@ -436,7 +436,7 @@ class AndroidLargeTwentysixOneScreen extends StatelessWidget {
   /// When the action is triggered, this function uses the [Navigator] widget
   /// to push the named route for the androidLargeEighteenScreen.
   onTapEmployees(BuildContext context) {
-    Navigator.pushNamed(context, AppRoutes.androidLargeEighteenScreen);
+    Navigator.pushNamed(context, AppRoutes.employeesScreen);
   }
 
   /// Navigates to the androidLargeSixteenScreen when the action is triggered.
@@ -445,7 +445,7 @@ class AndroidLargeTwentysixOneScreen extends StatelessWidget {
   /// When the action is triggered, this function uses the [Navigator] widget
   /// to push the named route for the androidLargeSixteenScreen.
   onTapTxtMenu(BuildContext context) {
-    Navigator.pushNamed(context, AppRoutes.androidLargeSixteenScreen);
+    Navigator.pushNamed(context, AppRoutes.menuScreen);
   }
 
   /// Navigates to the androidLargeNineteenScreen when the action is triggered.
@@ -454,6 +454,6 @@ class AndroidLargeTwentysixOneScreen extends StatelessWidget {
   /// When the action is triggered, this function uses the [Navigator] widget
   /// to push the named route for the androidLargeNineteenScreen.
   onTapTxtVendors(BuildContext context) {
-    Navigator.pushNamed(context, AppRoutes.androidLargeNineteenScreen);
+    Navigator.pushNamed(context, AppRoutes.vendorsScreen);
   }
 }

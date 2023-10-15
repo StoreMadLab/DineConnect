@@ -1,7 +1,7 @@
-import 'package:dineconnect/classes/user.dart';
+
 import 'package:dineconnect/core/app_export.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
+
 import 'package:firebase_database/firebase_database.dart';
 
 import 'package:flutter/material.dart';
@@ -21,7 +21,6 @@ class _HomeScreenState extends State<HomeScreen> {
   String fullName = ""; // Updated variable name
   String phoneNumber = "";
 
-  final DatabaseReference _userRef = FirebaseDatabase.instance.ref().child('users');
   final FirebaseAuth _auth = FirebaseAuth.instance;
   String? uid = "";
 
@@ -71,7 +70,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final screenHeight = MediaQuery.of(context).size.height;
+
 
     mediaQueryData = MediaQuery.of(context);
     return Scaffold(
@@ -142,15 +141,15 @@ class _HomeScreenState extends State<HomeScreen> {
                     itemActions: [
                           () {
                         Navigator.pushNamed(
-                            context, AppRoutes.androidLargeFiveScreen);
+                            context, AppRoutes.postAJobScreen);
                       },
                           () {
                         Navigator.pushNamed(
-                            context, AppRoutes.androidLargeTwentynineOneScreen);
+                            context, AppRoutes.manageJobsScreen);
                       },
                           () {
                         Navigator.pushNamed(
-                            context, AppRoutes.androidLargeSixScreen);
+                            context, AppRoutes.applicationScreen);
                       },
                     ],
                   ),
@@ -173,11 +172,11 @@ class _HomeScreenState extends State<HomeScreen> {
                     itemActions: [
                           () {
                         Navigator.pushNamed(
-                            context, AppRoutes.androidLargeFourScreen);
+                            context, AppRoutes.browseJobScreen);
                       },
                           () {
                         Navigator.pushNamed(context,
-                            AppRoutes.androidLargeTwentysixOneScreen);
+                            AppRoutes.applicationHistoryScreen);
                       },
                     ],
                   ),
@@ -201,19 +200,19 @@ class _HomeScreenState extends State<HomeScreen> {
                     itemActions: [
                           () {
                         Navigator.pushNamed(
-                            context, AppRoutes.androidLargeTwentysevenScreen);
+                            context, AppRoutes.ordersScreen);
                       },
                           () {
                         Navigator.pushNamed(
-                            context, AppRoutes.androidLargeEighteenScreen);
+                            context, AppRoutes.employeesScreen);
                       },
                           () {
                         Navigator.pushNamed(
-                            context, AppRoutes.androidLargeSixteenScreen);
+                            context, AppRoutes.menuScreen);
                       },
                           () {
                         Navigator.pushNamed(
-                            context, AppRoutes.androidLargeNineteenScreen);
+                            context, AppRoutes.vendorsScreen);
                       },
                     ],
                   ),
