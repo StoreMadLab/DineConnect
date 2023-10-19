@@ -53,6 +53,7 @@ class _HomeScreenState extends State<HomeScreen> {
       if (name != null) {
         setState(() {
           fullName = name; // Update the fullName variable
+
         });
       } else {
         // Handle the case where user data is not found.

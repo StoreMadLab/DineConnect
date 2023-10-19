@@ -1,13 +1,11 @@
 import 'package:dineconnect/core/app_export.dart';
 import 'package:dineconnect/presentation/android_large_fifteen_page/android_large_fifteen_page.dart';
 import 'package:dineconnect/presentation/android_large_thirtyone_page/android_large_thirtyone_page.dart';
-import 'package:dineconnect/widgets/app_bar/appbar_image_1.dart';
-import 'package:dineconnect/widgets/app_bar/appbar_subtitle.dart';
-import 'package:dineconnect/widgets/app_bar/custom_app_bar.dart';
+import 'package:dineconnect/services/firebase_service.dart';
 import 'package:dineconnect/widgets/custom_bottom_bar.dart';
 import 'package:dineconnect/widgets/custom_elevated_button.dart';
-import 'package:dineconnect/widgets/custom_header.dart';
 import 'package:dineconnect/widgets/custom_text_form_field.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 
 // ignore_for_file: must_be_immutable
@@ -16,17 +14,28 @@ class PostAJobScreen extends StatelessWidget {
 
   GlobalKey<NavigatorState> navigatorKey = GlobalKey();
 
-  TextEditingController nameController = TextEditingController();
+  TextEditingController hotelnameController = TextEditingController();
 
-  TextEditingController edittextController = TextEditingController();
+  TextEditingController roletextController = TextEditingController();
 
-  TextEditingController edittextoneController = TextEditingController();
+  TextEditingController descriptionController = TextEditingController();
 
-  TextEditingController edittexttwoController = TextEditingController();
+  TextEditingController salaryController = TextEditingController();
 
-  TextEditingController edittextthreeController = TextEditingController();
+  TextEditingController workingtimeController = TextEditingController();
 
   TextEditingController locationController = TextEditingController();
+
+  String phoneNumber = "";
+  String hotelName = "";
+  String employeeRole = "";
+  String jobDescription = "";
+  String salary = "";
+  String workinghours = "";
+  String location = "";
+
+
+  FirebaseService firebaseService = FirebaseService();
 
   @override
   Widget build(BuildContext context) {
@@ -44,96 +53,95 @@ class PostAJobScreen extends StatelessWidget {
                 textAlign: TextAlign.left,
               ),
             ),
-            // appBar: CustomAppBar(
-            //     height: 105.v,
-            //     centerTitle: true,
-            //     title: Column(children: [
-            //       Padding(
-            //           padding: EdgeInsets.only(left: 10.h, right: 205.h),
-            //           child: Row(children: [
-            //             AppbarImage1(
-            //                 svgPath: ImageConstant.imgArrowleft,
-            //                 onTap: () {
-            //                   onTapArrowleftone(context);
-            //                 }),
-            //             AppbarSubtitle(
-            //                 text: "Post a Job",
-            //                 margin: EdgeInsets.only(left: 7.h, bottom: 3.v))
-            //           ])),
-            //       SizedBox(height: 9.v),
-            //       Align(
-            //           alignment: Alignment.centerLeft,
-            //           child: SizedBox(width: 355.h, child: Divider()))
-            //     ]),
-            //     styleType: Style.bgFill_1),
-            body: Container(
-                width: double.maxFinite,
-                padding: EdgeInsets.symmetric(vertical: 4.v),
-                child: SingleChildScrollView(
-                  child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+            body: Stack(
+
+                children: [
+                  Flexible(
+                  child: Positioned.fill(
+                    child: SingleChildScrollView(
+                      child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Padding(
+                                padding: EdgeInsets.only(left: 40.h, top: 10.v),
+                                child: Text("Hotel Name",
+                                    style: CustomTextStyles
+                                        .titleLargeBlue800)),
+                            CustomTextFormField(
+                                controller: hotelnameController,
+                                textStyle: TextStyle(color: Colors.black),
+                                margin: EdgeInsets.only(
+                                    left: 36.h, top: 10.v, right: 19.h,bottom: 10.v),
+                                alignment: Alignment.centerRight),
+                            Padding(
+                                padding: EdgeInsets.only(left: 40.h, top: 10.v),
+                                child: Text("Role",
+                                    style: CustomTextStyles.titleLargeBlue800)),
+                            CustomTextFormField(
+                                controller: roletextController,
+                                textStyle: TextStyle(color: Colors.black),
+                                margin: EdgeInsets.only(
+                                    left: 36.h, top: 10.v, right: 19.h),
+                                alignment: Alignment.centerRight),
+                            Padding(
+                                padding: EdgeInsets.only(left: 40.h, top: 10.v),
+                                child: Text("Description",
+                                    style: CustomTextStyles.titleLargeBlue800)),
+                            CustomTextFormField(
+                              maxLines: 5,
+                                controller: descriptionController,
+                                textStyle: TextStyle(color: Colors.black),
+                                fieldHeight: 80,
+                                margin: EdgeInsets.only(
+                                    left: 36.h, top: 10.v, right: 19.h),
+                                alignment: Alignment.center,
+                                borderDecoration:
+                                    TextFormFieldStyleHelper.fillPrimary2,
+                                fillColor:
+                                    theme.colorScheme.primary.withOpacity(0.67)),
+                            Padding(
+                                padding: EdgeInsets.only(left: 40.h, top: 10.v),
+                                child: Text("Salary",
+                                    style: CustomTextStyles.titleLargeBlue800)),
+                            CustomTextFormField(
+                                controller: salaryController,
+                                textStyle: TextStyle(color: Colors.black),
+                                margin: EdgeInsets.only(
+                                    left: 36.h, top: 10.v, right: 19.h),
+                                alignment: Alignment.center),
+                            Padding(
+                                padding: EdgeInsets.only(left: 40.h, top: 10.v),
+                                child: Text("Working Hours",
+                                    style: CustomTextStyles.titleLargeBlue800)),
+                            CustomTextFormField(
+                                controller: workingtimeController,
+                                textStyle: TextStyle(color: Colors.black),
+                                margin: EdgeInsets.only(
+                                    left: 36.h, top: 10.v, right: 19.h),
+                                alignment: Alignment.center),
+                            Padding(
+                                padding: EdgeInsets.only(left: 40.h, top: 10.v),
+                                child: Text("Location",
+                                    style: CustomTextStyles.titleLargeBlue800)),
+                            CustomTextFormField(
+                                controller: locationController,
+                                textStyle: TextStyle(color: Colors.black),
+                                margin: EdgeInsets.only(
+                                    left: 36.h, top: 10.v, right: 19.h),
+                                textInputAction: TextInputAction.done,
+                                alignment: Alignment.center),
+                            SizedBox(height: 15.v),
+
+                          ]),
+                    ),
+                  ),
+                ),
+                Positioned(
+                    left: 0,
+                    right: 0,
+                    bottom: 0,
+                    child: Column(
                       children: [
-                        Padding(
-                            padding: EdgeInsets.only(left: 40.h, top: 10.v),
-                            child: Text("Hotel Name",
-                                style: CustomTextStyles
-                                    .titleLargeBlue800)),
-                        CustomTextFormField(
-                            controller: nameController,
-                            margin: EdgeInsets.only(
-                                left: 36.h, top: 10.v, right: 19.h,bottom: 10.v),
-                            alignment: Alignment.centerRight),
-                        Padding(
-                            padding: EdgeInsets.only(left: 40.h, top: 10.v),
-                            child: Text("Role",
-                                style: CustomTextStyles.titleLargeBlue800)),
-                        CustomTextFormField(
-                            controller: edittextController,
-                            margin: EdgeInsets.only(
-                                left: 36.h, top: 10.v, right: 19.h),
-                            alignment: Alignment.centerRight),
-                        Padding(
-                            padding: EdgeInsets.only(left: 40.h, top: 10.v),
-                            child: Text("Description",
-                                style: CustomTextStyles.titleLargeBlue800)),
-                        CustomTextFormField(
-                            controller: edittextoneController,
-                            margin: EdgeInsets.only(
-                                left: 36.h, top: 10.v, right: 19.h),
-                            alignment: Alignment.center,
-                            borderDecoration:
-                                TextFormFieldStyleHelper.fillPrimary2,
-                            fillColor:
-                                theme.colorScheme.primary.withOpacity(0.67)),
-                        Padding(
-                            padding: EdgeInsets.only(left: 40.h, top: 10.v),
-                            child: Text("Salary",
-                                style: CustomTextStyles.titleLargeBlue800)),
-                        CustomTextFormField(
-                            controller: edittexttwoController,
-                            margin: EdgeInsets.only(
-                                left: 36.h, top: 10.v, right: 19.h),
-                            alignment: Alignment.center),
-                        Padding(
-                            padding: EdgeInsets.only(left: 40.h, top: 10.v),
-                            child: Text("Working Hours",
-                                style: CustomTextStyles.titleLargeBlue800)),
-                        CustomTextFormField(
-                            controller: edittextthreeController,
-                            margin: EdgeInsets.only(
-                                left: 36.h, top: 10.v, right: 19.h),
-                            alignment: Alignment.center),
-                        Padding(
-                            padding: EdgeInsets.only(left: 40.h, top: 10.v),
-                            child: Text("Location",
-                                style: CustomTextStyles.titleLargeBlue800)),
-                        CustomTextFormField(
-                            controller: locationController,
-                            margin: EdgeInsets.only(
-                                left: 36.h, top: 10.v, right: 19.h),
-                            textInputAction: TextInputAction.done,
-                            alignment: Alignment.center),
-                        SizedBox(height: 15.v),
                         Divider(),
                         SizedBox(height: 4.v),
                         CustomElevatedButton(
@@ -142,14 +150,17 @@ class PostAJobScreen extends StatelessWidget {
                             text: "SUBMIT",
                             alignment: Alignment.center,
                             buttonTextStyle:
-                                CustomTextStyles.titleMediumNewsreader,
+                            CustomTextStyles.titleMediumNewsreader,
                             onTap: () {
                               onTapSubmit(context);
                             }),
                         SizedBox(height: 4.v),
                         Divider(),
-                      ]),
-                )),
+                      ],
+                    )
+                )
+              ]
+            ),
             bottomNavigationBar:
                 CustomBottomBar(onChanged: (BottomBarEnum type) {
               Navigator.pushNamed(
@@ -198,7 +209,28 @@ class PostAJobScreen extends StatelessWidget {
   /// The [BuildContext] parameter is used to build the navigation stack.
   /// When the action is triggered, this function uses the [Navigator] widget
   /// to push the named route for the androidLargeTwentynineOneScreen.
-  onTapSubmit(BuildContext context) {
+  onTapSubmit(BuildContext context) async {
+
+    hotelName = hotelnameController.text;
+    employeeRole = roletextController.text;
+    jobDescription = descriptionController.text;
+    salary = salaryController.text;
+    workinghours = workingtimeController.text;
+    location = locationController.text;
+
+    DatabaseReference usersRef = FirebaseDatabase.instance.ref().child("jobs_post");
+
+    phoneNumber = firebaseService.getPhoneNumber()!;
+
+    await usersRef.child(phoneNumber).set({
+      "hotelName": hotelName,
+      "employeeRole": employeeRole,
+      "jobDescription": jobDescription,
+      "salary": salary,
+      "workinghours": workinghours,
+      "location": location,
+    });
+
     Navigator.pushNamed(context, AppRoutes.manageJobsScreen);
   }
 }

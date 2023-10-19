@@ -102,13 +102,6 @@ class LoginScreen extends StatelessWidget {
                           buttonStyle: CustomButtonStyles.fillPrimary,
                           buttonTextStyle: theme.textTheme.titleLarge!,
                           onTap: () {
-                            // await FirebaseAuth.instance.verifyPhoneNumber(
-                            //   phoneNumber: mobileNoController.text,
-                            //   verificationCompleted: (PhoneAuthCredential credential) {},
-                            //   verificationFailed: (FirebaseAuthException e) {},
-                            //   codeSent: (String verificationId, int? resendToken) {},
-                            //   codeAutoRetrievalTimeout: (String verificationId) {},
-                            // );
                             onTapRequestotp(context);
                           }),
                       SizedBox(height: 41.v),

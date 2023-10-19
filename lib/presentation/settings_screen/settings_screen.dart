@@ -2,9 +2,6 @@ import 'package:dineconnect/core/app_export.dart';
 import 'package:dineconnect/widgets/custom_icon_button.dart';
 import 'package:flutter/material.dart';
 import 'package:dineconnect/services/firebase_service.dart';
-
-import '../../core/utils/image_constant.dart';
-import '../../widgets/custom_image_view.dart';
 import '../../widgets/custom_text_form_field.dart';
 
 class SettingsScreen extends StatefulWidget {

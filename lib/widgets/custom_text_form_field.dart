@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 class CustomTextFormField extends StatelessWidget {
   CustomTextFormField({
     Key? key,
+    this.fieldHeight,
     this.alignment,
     this.width,
     this.margin,
@@ -29,6 +30,8 @@ class CustomTextFormField extends StatelessWidget {
   }) : super(
           key: key,
         );
+
+  final double? fieldHeight;
 
   final Alignment? alignment;
 
@@ -85,45 +88,46 @@ class CustomTextFormField extends StatelessWidget {
   }
 
   Widget get textFormFieldWidget => Container(
-        width: width ?? double.maxFinite,
-        margin: margin,
-        child: TextFormField(
-          controller: controller,
-          focusNode: focusNode ?? FocusNode(),
-          autofocus: autofocus!,
-          style: textStyle ?? CustomTextStyles.bodySmallOnPrimary,
-          obscureText: obscureText!,
-          textInputAction: textInputAction,
-          keyboardType: textInputType,
-          maxLines: maxLines ?? 1,
-          decoration: decoration,
-          validator: validator,
-        ),
-      );
+    width: width ?? double.maxFinite,
+    margin: margin,
+    child: TextFormField(
+      controller: controller,
+      focusNode: focusNode ?? FocusNode(),
+      autofocus: autofocus!,
+      style: textStyle ?? CustomTextStyles.bodySmallOnPrimary,
+      obscureText: obscureText!,
+      textInputAction: textInputAction,
+      keyboardType: textInputType,
+      maxLines: maxLines ?? 1,
+      decoration: decoration,
+      validator: validator,
+    ),
+  );
   InputDecoration get decoration => InputDecoration(
-        hintText: hintText ?? "",
-        hintStyle: hintStyle ?? CustomTextStyles.titleLargeSemiBold,
-        prefixIcon: prefix,
-        prefixIconConstraints: prefixConstraints,
-        suffixIcon: suffix,
-        suffixIconConstraints: suffixConstraints,
-        isDense: true,
-        contentPadding: contentPadding ?? EdgeInsets.all(20.h),
-        fillColor: fillColor ?? theme.colorScheme.primary,
-        filled: filled,
-        border: borderDecoration ??
-            OutlineInputBorder(
-              borderSide: BorderSide.none,
-            ),
-        enabledBorder: borderDecoration ??
-            OutlineInputBorder(
-              borderSide: BorderSide.none,
-            ),
-        focusedBorder: borderDecoration ??
-            OutlineInputBorder(
-              borderSide: BorderSide.none,
-            ),
-      );
+    hintText: hintText ?? "",
+    hintStyle: hintStyle ?? CustomTextStyles.titleLargeSemiBold,
+    prefixIcon: prefix,
+    prefixIconConstraints: prefixConstraints,
+    suffixIcon: suffix,
+    suffixIconConstraints: suffixConstraints,
+    isDense: true,
+    contentPadding: contentPadding ??
+        EdgeInsets.symmetric(vertical: (fieldHeight ?? 50.0) / 3.0),
+    fillColor: fillColor ?? theme.colorScheme.primary,
+    filled: filled,
+    border: borderDecoration ??
+        OutlineInputBorder(
+          borderSide: BorderSide.none,
+        ),
+    enabledBorder: borderDecoration ??
+        OutlineInputBorder(
+          borderSide: BorderSide.none,
+        ),
+    focusedBorder: borderDecoration ??
+        OutlineInputBorder(
+          borderSide: BorderSide.none,
+        ),
+  );
 }
 
 /// Extension on [CustomTextFormField] to facilitate inclusion of all types of border style etc
