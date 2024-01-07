@@ -1,3 +1,4 @@
+import 'package:dineconnect/services/job_posting.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 
@@ -60,6 +61,37 @@ class FirebaseService {
     } catch (e) {
       print('Error fetching location data: $e');
       return null;
+    }
+  }
+
+  Future<List<JobPosting>> fetchJobPostings(String phoneNumber) async {
+    try {
+      final jobPostingsRef = _databaseReference.child('jobs_post').child(phoneNumber);
+      DatabaseEvent databaseEvent = await jobPostingsRef.once();
+
+      List<JobPosting> jobPostings = [];
+
+      if (databaseEvent.snapshot.value != null) {
+        Map<String, dynamic> data = databaseEvent.snapshot.value as Map<String, dynamic>;
+
+        data.forEach((uniqueReference, value) {
+          JobPosting jobPosting = JobPosting(
+            employeeRole: value['employeeRole'],
+            hotelName: value['hotelName'],
+            location: value['location'],
+            salary: value['salary'],
+            jobDescription: value['jobDescription'],
+            status: value['status'],
+            workingHours: value['workingHours'],
+          );
+          jobPostings.add(jobPosting);
+        });
+      }
+
+      return jobPostings;
+    } catch (e) {
+      print('Error fetching job postings: $e');
+      return [];
     }
   }
 }

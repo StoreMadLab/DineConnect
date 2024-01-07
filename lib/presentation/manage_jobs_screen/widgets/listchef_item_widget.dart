@@ -3,8 +3,8 @@ import 'package:dineconnect/widgets/custom_elevated_button.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
-class Listmainchef1ItemWidget extends StatelessWidget {
-  Listmainchef1ItemWidget({
+class ListchefItemWidget extends StatelessWidget {
+  ListchefItemWidget({
     Key? key,
     this.onTapEdit,
   }) : super(
