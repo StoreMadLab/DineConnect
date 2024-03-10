@@ -10,9 +10,11 @@ class FirebaseService {
     return user?.phoneNumber;
   }
 
-  Future<void> updateFullName(String phoneNumber, String updatedFullName) async {
+  Future<void> updateFullName(String phoneNumber,
+      String updatedFullName) async {
     // Get the reference to the location where you want to update the full name.
-    DatabaseReference userRef = _databaseReference.child('users/$phoneNumber/fullName');
+    DatabaseReference userRef = _databaseReference.child(
+        'users/$phoneNumber/fullName');
 
     try {
       await userRef.set(updatedFullName);
@@ -22,9 +24,11 @@ class FirebaseService {
     }
   }
 
-  Future<void> updateLocation(String phoneNumber, String updatedLocation) async {
+  Future<void> updateLocation(String phoneNumber,
+      String updatedLocation) async {
     // Get the reference to the location where you want to update the location.
-    DatabaseReference userRef = _databaseReference.child('users/$phoneNumber/location');
+    DatabaseReference userRef = _databaseReference.child(
+        'users/$phoneNumber/location');
 
     try {
       await userRef.set(updatedLocation);
@@ -38,6 +42,8 @@ class FirebaseService {
     try {
       final userRef = _databaseReference.child('users/$phoneNumber/fullName');
       DatabaseEvent databaseEvent = await userRef.once();
+      print(databaseEvent.snapshot.value.toString());
+
       if (databaseEvent.snapshot.value != null) {
         return databaseEvent.snapshot.value.toString();
       } else {
@@ -51,7 +57,8 @@ class FirebaseService {
 
   Future<String?> fetchLocation(String phoneNumber) async {
     try {
-      final locationRef = _databaseReference.child('users/$phoneNumber/location');
+      final locationRef = _databaseReference.child(
+          'users/$phoneNumber/location');
       DatabaseEvent databaseEvent = await locationRef.once();
       if (databaseEvent.snapshot.value != null) {
         return databaseEvent.snapshot.value.toString();
@@ -64,31 +71,73 @@ class FirebaseService {
     }
   }
 
-  Future<List<JobPosting>> fetchJobPostings(String phoneNumber) async {
+//   Future<List<JobPosting>> fetchJobPostings(String phoneNumber) async {
+//     try {
+//       final jobPostingsRef = _databaseReference.child('jobs_post/$phoneNumber');
+//       DatabaseEvent databaseEvent = await jobPostingsRef.once();
+//
+//       List<JobPosting> jobPostings = [];
+//
+//       print(databaseEvent.snapshot.value.toString());
+//       if (databaseEvent.snapshot.value != null) {
+//         List<dynamic> data = databaseEvent.snapshot.value as List<dynamic>;
+//         data.forEach((value) {
+//           JobPosting jobPosting = JobPosting(
+//             employeeRole: value['employeeRole'],
+//             hotelName: value['hotelName'],
+//             location: value['location'],
+//             salary: value['salary'],
+//             jobDescription: value['jobDescription'],
+//             status: value['status'],
+//             workingHours: value['workingHours'],
+//           );
+//           jobPostings.add(jobPosting);
+//         });
+//       }
+//       print(jobPostings.toString());
+//       return jobPostings;
+//     } catch (e) {
+//       print('Error fetching job postings: $e');
+//       return [];
+//     }
+//   }
+// }
+  Future<List<JobPosting>> fetchJobPostings() async {
     try {
-      final jobPostingsRef = _databaseReference.child('jobs_post').child(phoneNumber);
-      DatabaseEvent databaseEvent = await jobPostingsRef.once();
+      final phoneNumber = FirebaseAuth.instance.currentUser?.phoneNumber;
+      if (phoneNumber != null) {
+        final jobPostingsRef = _databaseReference.child(
+            'jobs_post/$phoneNumber');
+        DatabaseEvent databaseEvent = await jobPostingsRef.once();
 
-      List<JobPosting> jobPostings = [];
+        List<JobPosting> jobPostings = [];
 
-      if (databaseEvent.snapshot.value != null) {
-        Map<String, dynamic> data = databaseEvent.snapshot.value as Map<String, dynamic>;
+        if (databaseEvent.snapshot.value != null) {
+          dynamic data = databaseEvent.snapshot.value;
 
-        data.forEach((uniqueReference, value) {
-          JobPosting jobPosting = JobPosting(
-            employeeRole: value['employeeRole'],
-            hotelName: value['hotelName'],
-            location: value['location'],
-            salary: value['salary'],
-            jobDescription: value['jobDescription'],
-            status: value['status'],
-            workingHours: value['workingHours'],
-          );
-          jobPostings.add(jobPosting);
-        });
+          if (data is Map<dynamic, dynamic>) {
+            // Single object case
+            JobPosting jobPosting = JobPosting(
+              employeeRole: data['employeeRole'],
+              hotelName: data['hotelName'],
+              location: data['location'],
+              salary: data['salary'],
+              jobDescription: data['jobDescription'],
+              status: data['status'],
+              workingHours: data['workinghours'], // Correct the key to 'workinghours'
+            );
+
+            jobPostings.add(jobPosting);
+          } else {
+            print('Error: Data is not of type Map<String, dynamic>');
+          }
+        }
+
+        return jobPostings;
+      } else {
+        // Handle user not logged in
+        return [];
       }
-
-      return jobPostings;
     } catch (e) {
       print('Error fetching job postings: $e');
       return [];

@@ -1,4 +1,5 @@
 import 'package:dineconnect/core/app_export.dart';
+import 'package:dineconnect/services/job_posting.dart';
 import 'package:flutter/material.dart';
 
 class JobItemWidget extends StatelessWidget {
@@ -11,7 +12,7 @@ class JobItemWidget extends StatelessWidget {
     required this.jobRole,
     required this.salary,
     required this.workHours,
-    required this.onTapEdit,
+    required this.onTapEdit, required JobPosting jobPosting,
   });
 
   @override

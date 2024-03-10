@@ -1,6 +1,9 @@
+// import 'dart:js';
+
+import 'package:dineconnect/presentation/manage_jobs_screen/edit_jobs_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:dineconnect/presentation/android_large_thirtyone_container_screen/android_large_thirtyone_container_screen.dart';
-import 'package:dineconnect/presentation/android_large_twentyseven_screen/android_large_twentyseven_screen.dart';
+import 'package:dineconnect/presentation/orders_screen/orders_screen.dart';
 import 'package:dineconnect/presentation/android_large_four_screen/android_large_four_screen.dart';
 import 'package:dineconnect/presentation/android_large_twentyeight_screen/android_large_twentyeight_screen.dart';
 import 'package:dineconnect/presentation/android_large_twentynine_screen/android_large_twentynine_screen.dart';
@@ -17,7 +20,7 @@ import 'package:dineconnect/presentation/home_screen/home_screen.dart';
 import 'package:dineconnect/presentation/settings_screen/settings_screen.dart';
 import 'package:dineconnect/presentation/android_large_thirty_one_screen/android_large_thirty_one_screen.dart';
 import 'package:dineconnect/presentation/android_large_thirty_screen/android_large_thirty_screen.dart';
-import 'package:dineconnect/presentation/android_large_sixteen_screen/android_large_sixteen_screen.dart';
+import 'package:dineconnect/presentation/menu_screen/menu_screen.dart';
 import 'package:dineconnect/presentation/android_large_eighteen_screen/android_large_eighteen_screen.dart';
 import 'package:dineconnect/presentation/android_large_nineteen_screen/android_large_nineteen_screen.dart';
 import 'package:dineconnect/presentation/app_navigation_screen/app_navigation_screen.dart';
@@ -93,6 +96,8 @@ class AppRoutes {
 
   static const String appNavigationScreen = '/app_navigation_screen';
 
+  static const String editJobsScreen = '/edit_jobs_screen';
+
   static Map<String, WidgetBuilder> routes = {
     launcherScreen: (context) => LauncherScreen(),
     androidLargeThirtyoneContainerScreen: (context) =>
@@ -116,9 +121,10 @@ class AppRoutes {
     settingsScreen: (context) => SettingsScreen(),
     androidLargeThirtyOneScreen: (context) => AndroidLargeThirtyOneScreen(),
     androidLargeThirtyScreen: (context) => AndroidLargeThirtyScreen(),
-    menuScreen: (context) => AndroidLargeSixteenScreen(),
+    menuScreen: (context) => MenuScreen(),
     employeesScreen: (context) => AndroidLargeEighteenScreen(),
     vendorsScreen: (context) => AndroidLargeNineteenScreen(),
-    appNavigationScreen: (context) => AppNavigationScreen()
+    appNavigationScreen: (context) => AppNavigationScreen(),
+    // editJobsScreen: (context) => EditJobsScreen(jobPosting: null,)
   };
 }

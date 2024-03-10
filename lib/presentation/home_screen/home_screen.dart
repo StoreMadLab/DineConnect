@@ -1,5 +1,6 @@
 
 import 'package:dineconnect/core/app_export.dart';
+import 'package:dineconnect/presentation/launcherScreen/launcher_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:firebase_database/firebase_database.dart';
@@ -77,49 +78,81 @@ class _HomeScreenState extends State<HomeScreen> {
 
     mediaQueryData = MediaQuery.of(context);
     return Scaffold(
-      resizeToAvoidBottomInset: true,
+      appBar: AppBar(
+        title: Text("D I N E C O N N E C T"),
+        backgroundColor: Colors.blueAccent,
+      ),
       body: SingleChildScrollView(
         physics: AlwaysScrollableScrollPhysics(),
         child: Container(
           width: double.maxFinite,
-          padding: EdgeInsets.only(top: 65.v),
           child: Column(
             children: [
               Container(
-                margin: EdgeInsets.only(right: 1.h),
+                margin: EdgeInsets.only(right: 1.h,top: 10),
                 padding: EdgeInsets.symmetric(vertical: 10.v),
-                decoration: AppDecoration.gradientIndigoToBlue,
+                decoration: BoxDecoration(
+                  color: Colors.blue.shade200,
+                  borderRadius: BorderRadius.circular(10)
+                ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     Padding(
                       padding: EdgeInsets.only(
                           left: 9.h, top: 6.v, right: 16.h),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                      child: Column(
                         children: [
-                          Padding(
-                            padding: EdgeInsets.only(
-                                top: 1.v, bottom: 7.v),
-                            child: Text(
-                              fullName, // Display full name here
-                              style: theme
-                                  .textTheme.headlineLarge,
-                            ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.only(
+                                    top: 10.v, bottom: 1.v),
+                                child: Text(
+                                  "Hi, "+fullName, // Display full name here
+                                  style: theme
+                                      .textTheme.headlineLarge,
+                                ),
+                              ),
+                              CustomImageView(
+                                svgPath: ImageConstant.imgEmojimanoffice,
+                                height: 41.v,
+                                width: 47.h,
+                                onTap: () {
+                                  onTapImgEmojimanoffice(context);
+                                },
+                              ),
+                            ],
                           ),
-                          CustomImageView(
-                            svgPath: ImageConstant.imgEmojimanoffice,
-                            height: 41.v,
-                            width: 47.h,
-                            onTap: () {
-                              onTapImgEmojimanoffice(context);
-                            },
+                          SizedBox(height: 10,),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              Container(
+                                decoration: BoxDecoration(
+                                  color: Colors.red.shade900,
+                                  shape: BoxShape.circle,
+                                ),
+                                child: IconButton(
+                                    onPressed: () {
+                                      _auth.signOut();
+                                      LauncherScreen();
+                                    },
+                                    icon: Icon(
+                                      Icons.logout,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+
+                              ),
+                            ],
                           ),
                         ],
                       ),
                     ),
-                    SizedBox(height: 46.v),
+                    SizedBox(height: 8.v),
                     Divider(),
                   ],
                 ),

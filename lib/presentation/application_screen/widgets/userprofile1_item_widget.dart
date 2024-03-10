@@ -24,7 +24,10 @@ class Userprofile1ItemWidget extends StatelessWidget {
           horizontal: 7.h,
           vertical: 9.v,
         ),
-        decoration: AppDecoration.fillGray,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          color: Colors.blue.shade200
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

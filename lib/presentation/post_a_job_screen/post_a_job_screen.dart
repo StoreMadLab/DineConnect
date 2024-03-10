@@ -209,6 +209,7 @@ class PostAJobScreen extends StatelessWidget {
       "salary": salary,
       "workinghours": workinghours,
       "location": location,
+      "status" : "true",
     });
 
     Navigator.pushNamed(context, AppRoutes.manageJobsScreen);

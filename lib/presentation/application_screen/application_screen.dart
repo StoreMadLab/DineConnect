@@ -16,9 +16,15 @@ class ApplicationScreen extends StatelessWidget {
     mediaQueryData = MediaQuery.of(context);
     return SafeArea(
         child: Scaffold(
+          appBar: AppBar(
+            title: Text(
+              "DINECONNECT"
+            ),
+            backgroundColor: Colors.blueAccent,
+          ),
             body: Container(
                 width: double.maxFinite,
-                padding: EdgeInsets.only(top: 65.v),
+                padding: EdgeInsets.only(top: 20.v),
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -46,7 +52,7 @@ class ApplicationScreen extends StatelessWidget {
                               separatorBuilder: (context, index) {
                                 return Padding(
                                     padding:
-                                        EdgeInsets.symmetric(vertical: 7.0.v),
+                                        EdgeInsets.all(20.0,),
                                     child: SizedBox(
                                         width: double.maxFinite,
                                         child: Divider(

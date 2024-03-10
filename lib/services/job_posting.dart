@@ -4,7 +4,7 @@ class JobPosting {
   String jobDescription;
   String location;
   String salary;
-  bool status;
+  String status;
   String workingHours;
 
   JobPosting({
