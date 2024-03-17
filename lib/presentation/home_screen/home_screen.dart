@@ -145,7 +145,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                       color: Colors.white,
                                     ),
                                   ),
-
                               ),
                             ],
                           ),
@@ -153,7 +152,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ),
                     SizedBox(height: 8.v),
-                    Divider(),
+
                   ],
                 ),
               ),

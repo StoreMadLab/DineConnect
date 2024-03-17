@@ -1,16 +1,35 @@
+import 'dart:io';
+
+import 'package:dineconnect/presentation/orders_screen/orders_screen.dart';
+import 'package:dineconnect/services/firebase_service.dart';
+import 'package:dineconnect/widgets/custom_text_form_field.dart';
+import 'package:image_picker/image_picker.dart';
+
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+import 'package:path/path.dart' as Path;
+
 import '../menu_screen/widgets/productinfo_item_widget.dart';
 import 'package:dineconnect/core/app_export.dart';
-import 'package:dineconnect/presentation/android_large_fifteen_page/android_large_fifteen_page.dart';
-import 'package:dineconnect/presentation/android_large_thirtyone_page/android_large_thirtyone_page.dart';
+import 'package:dineconnect/presentation/application_history_full_screen/application_history_full_Screen.dart';
 import 'package:dineconnect/widgets/app_bar/appbar_image_1.dart';
 import 'package:dineconnect/widgets/app_bar/custom_app_bar.dart';
 import 'package:dineconnect/widgets/custom_bottom_bar.dart';
-import 'package:dineconnect/widgets/custom_elevated_button.dart';
-import 'package:dineconnect/widgets/custom_icon_button.dart';
 import 'package:flutter/material.dart';
 
-class MenuScreen extends StatelessWidget {
-  MenuScreen({Key? key}) : super(key: key);
+class MenuScreen extends StatefulWidget {
+  const MenuScreen({Key? key}) : super(key: key);
+
+  @override
+  _MenuScreenState createState() => _MenuScreenState();
+}
+
+class _MenuScreenState extends State<MenuScreen> {
+  TextEditingController dishController = TextEditingController();
+  TextEditingController priceController = TextEditingController();
+  File? _image;
+  late String? _uploadedFileURL;
+
+  FirebaseService firebaseService = FirebaseService();
 
   GlobalKey<NavigatorState> navigatorKey = GlobalKey();
 
@@ -18,243 +37,290 @@ class MenuScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     mediaQueryData = MediaQuery.of(context);
     return SafeArea(
-      child: Scaffold(
-        body: SizedBox(
-          width: double.maxFinite,
-          child: Column(
+        child: Scaffold(
+          appBar: CustomAppBar(
+              centerTitle: true,
+              title: AppbarImage1(
+                  imagePath: ImageConstant.imgDineconnectlogosblack)
+          ),
+          body: Column(
             children: [
-              SizedBox(height: 11.v),
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: IntrinsicWidth(
+              Padding(
+                  padding: EdgeInsets.only(left: 6.h),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Align(
-                        alignment: Alignment.topCenter,
-                        child: Container(
-                          height: 33.v, // Fixed height for CustomAppBar
-                          child: CustomAppBar(
-                            centerTitle: true,
-                            title: AppbarImage1(
-                              imagePath: ImageConstant.imgDineconnectlogosblack,
-                            ),
-                          ),
-                        ),
-                      ),
-                      CustomImageView(
-                        imagePath: ImageConstant.imgDineconnectlogosblack,
-                        height: 33.v,
-                        width: 349.h,
-                        margin: EdgeInsets.only(left: 40.h),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              Container(
-                padding: EdgeInsets.symmetric(vertical: 17.v),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.only(left: 6.h, top: 15.v),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          CustomImageView(
+                      children: [
+                        CustomImageView(
                             svgPath: ImageConstant.imgArrowleft,
                             height: 30.v,
                             width: 31.h,
                             onTap: () {
                               onTapImgArrowleftone(context);
-                            },
-                          ),
-                          Padding(
-                            padding: EdgeInsets.only(left: 11.h, bottom: 5.v),
-                            child: Text(
-                              "Menu",
-                              style: theme.textTheme.headlineSmall,
+                            }),
+                        Padding(
+                            padding: EdgeInsets.only(
+                                left: 13.h, top: 4.v, bottom: 2.v),
+                            child: Text("Menu",
+                                style: theme.textTheme.headlineSmall)
+                        ),
+                      ]
+                  )
+              ),
+
+              SizedBox(height: 9.v),
+
+              Divider(),
+
+              SizedBox(height: 9.v),
+
+              Container(
+                height: 150,
+                width: 350,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(30),
+                  color: Colors.amberAccent.shade200,
+                ),
+                child: Column(
+                  children: [
+                    Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(left: 20, top: 10),
+                          child: Text(
+                              "Image:",
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
                             ),
                           ),
-                        ],
-                      ),
-                    ),
-                    SizedBox(height: 3.v),
-                    Divider(),
-                    Align(
-                      alignment: Alignment.center,
-                      child: Container(
-                        margin: EdgeInsets.only(left: 32.h, top: 18.v, right: 21.h),
-                        padding: EdgeInsets.symmetric(horizontal: 13.h, vertical: 8.v),
-                        decoration: AppDecoration.fillOrange.copyWith(
-                          borderRadius: BorderRadiusStyle.roundedBorder30,
                         ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisSize: MainAxisSize.min,
+                      ],
+                    ),
+
+                    SizedBox(height: 5,),
+
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        _image != null
+                            ? Container(
+                          child: Image.file(
+                            _image!,
+                            height: 70,
+                            width: 100,
+                          ),
+                        )
+
+                            : GestureDetector(
+                              onTap: chooseFile,
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(10)
+                                  ),
+                                  child: Icon(
+                                    Icons.add_box_outlined,
+                                    size: 80,
+                                  ),
+                                ),
+                        ),
+
+                        // _image == null
+                        // ? GestureDetector(
+                        //   onTap: chooseFile,
+                        //     child: Container(
+                        //      decoration: BoxDecoration(
+                        //       color: Colors.white,
+                        //       borderRadius: BorderRadius.circular(10)
+                        //     ),
+                        //     child: Icon(
+                        //       Icons.add_box_outlined,
+                        //       size: 80,
+                        //     ),
+                        //   ),
+                        // )
+                        //     : Container(),
+                        Column(
                           children: [
-                            Padding(
-                              padding: EdgeInsets.only(top: 3.v, bottom: 28.v),
-                              child: Column(
-                                children: [
-                                  Text(
-                                    "Image:",
-                                    style: CustomTextStyles.titleSmallInter,
-                                  ),
-                                  SizedBox(height: 1.v),
-                                  CustomIconButton(
-                                    height: 69.adaptSize,
-                                    width: 69.adaptSize,
-                                    padding: EdgeInsets.all(4.h),
-                                    decoration: IconButtonStyleHelper.fillGrayTL20,
-                                    child: CustomImageView(
-                                      svgPath: ImageConstant.imgPlusOnprimary,
-                                    ),
-                                  ),
-                                ],
+                            Text(
+                                "Dish:",
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 28
                               ),
                             ),
-                            Expanded(
-                              child: Padding(
-                                padding: EdgeInsets.only(top: 27.v, right: 4.h),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Align(
-                                      alignment: Alignment.centerRight,
-                                      child: Row(
-                                        mainAxisAlignment: MainAxisAlignment.end,
-                                        children: [
-                                          Padding(
-                                            padding: EdgeInsets.only(bottom: 2.v),
-                                            child: Text(
-                                              "Dish:",
-                                              style: CustomTextStyles.headlineSmallNicoMojiOnError,
-                                            ),
-                                          ),
-                                          Container(
-                                            height: 25.v,
-                                            width: 119.h,
-                                            margin: EdgeInsets.only(left: 5.h),
-                                            decoration: BoxDecoration(
-                                              color: theme.colorScheme.onPrimaryContainer,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    SizedBox(height: 9.v),
-                                    Row(
-                                      children: [
-                                        Text(
-                                          "Price:",
-                                          style: CustomTextStyles.headlineSmallInterOnError_1,
-                                        ),
-                                        Container(
-                                          height: 25.v,
-                                          width: 119.h,
-                                          margin: EdgeInsets.only(left: 4.h, top: 3.v),
-                                          decoration: BoxDecoration(
-                                            color: theme.colorScheme.onPrimaryContainer,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    CustomElevatedButton(
-                                      height: 21.v,
-                                      width: 120.h,
-                                      text: "ADD Dish",
-                                      margin: EdgeInsets.only(left: 16.h, top: 6.v),
-                                      buttonStyle: CustomButtonStyles.fillIndigo,
-                                      buttonTextStyle: CustomTextStyles.bodySmallNicoMojiOnPrimaryContainer,
-                                    ),
-                                  ],
-                                ),
+
+                            SizedBox(height: 10,),
+
+                            Text(
+                              "Price:",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 28
                               ),
                             ),
                           ],
                         ),
-                      ),
+                        Column(
+                          children: [
+                            CustomTextFormField(
+                              width: 130.h,
+                              fieldHeight: 10,
+                              controller: dishController,
+                              textStyle: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 15,
+                              ),
+                            ),
+
+                            SizedBox(height: 10,),
+
+                            CustomTextFormField(
+                              width: 130.h,
+                              fieldHeight: 10,
+                              controller: priceController,
+                              textStyle: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 15,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
                     ),
-                    SizedBox(height: 7.v),
-                    SizedBox(
-                      height: 430.v,
-                      width: double.maxFinite,
-                      child: Stack(
-                        alignment: Alignment.center,
-                        children: [
-                          Align(
-                            alignment: Alignment.topCenter,
-                            child: Padding(
-                              padding: EdgeInsets.fromLTRB(31.h, 18.v, 31.h, 113.v),
-                              child: GridView.builder(
-                                shrinkWrap: true,
-                                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                                  mainAxisExtent: 138.v,
-                                  crossAxisCount: 2,
-                                  mainAxisSpacing: 23.h,
-                                  crossAxisSpacing: 23.h,
-                                ),
-                                physics: BouncingScrollPhysics(),
-                                itemCount: 3,
-                                itemBuilder: (context, index) {
-                                  return ProductinfoItemWidget();
-                                },
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+
+                      _image != null
+                          ? Padding(
+                            padding: const EdgeInsets.only(top: 8),
+                            child: ElevatedButton(
+                        child: Container(
+                              padding: EdgeInsets.only(left: 10),
+                              width: 160,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(30),
+                              ),
+                              child: Text(
+                                  'Clear Selection',
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                  ))
+                        ),
+                        onPressed: clearSelection,
+                      ),
+                          )
+                          : Padding(
+                        padding: const EdgeInsets.only(top: 8),
+                            child: Container(
+                        padding: EdgeInsets.only(left: 10),
+                        width: 160,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(30),
+                            color: Colors.red.shade300
+                        ),
+                        child: Text(
+                            "Clear Selection",
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
+                        ),
+                      ),
+                          ),
+
+                      Padding(
+                        padding: const EdgeInsets.only(left: 10,top: 8),
+                        child: _image != null
+                            ? ElevatedButton(
+                          child: Container(
+                            padding: EdgeInsets.only(left: 20),
+                            width: 150,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(30),
+                            ),
+                            child: Text('Upload Data',
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
                               ),
                             ),
                           ),
-                          Align(
-                            alignment: Alignment.center,
-                            child: SizedBox(
-                              height: 430.v,
-                              width: double.maxFinite,
-                              child: Stack(
-                                alignment: Alignment.centerRight,
-                                children: [
-                                  Align(
-                                    alignment: Alignment.topCenter,
-                                    child: SizedBox(
-                                      width: double.maxFinite,
-                                      child: Divider(),
-                                    ),
-                                  ),
-                                  Align(
-                                    alignment: Alignment.centerRight,
-                                    child: Container(
-                                      decoration: AppDecoration.fillGray400,
-                                      child: Container(
-                                        height: 88.v,
-                                        width: 9.h,
-                                        decoration: BoxDecoration(
-                                          color: appTheme.gray500,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
+                          onPressed: uploadFile,
+                          style: ElevatedButton.styleFrom(
+                            primary: Colors.green,
+                            onPrimary: Colors.white,
+                          ),
+                        ) :Container(
+                          padding: EdgeInsets.only(left: 20),
+                          width: 150,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(30),
+                            color: Colors.blue,
+                          ),
+                          child: Text(
+                            "Upload Data",
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
                             ),
                           ),
-                        ],
-                      ),
-                    ),
+                        ),
+                      )
+                    ],
+                  ),
                   ],
                 ),
               ),
+
+              SizedBox(height: 10,),
+              Divider(),
+              SizedBox(height: 10,),
+
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  ProductinfoItemWidget(
+                    Dish: 'Chi Noodles',
+                    price: '50',
+                  ),
+
+                  ProductinfoItemWidget(
+                    Dish: 'Egg Noodles',
+                    price: '45',
+                  ),
+                ],
+              ),
+
+              SizedBox(height: 10,),
+
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  ProductinfoItemWidget(
+                    Dish: 'Veg Noodles',
+                    price: '40',
+                  ),
+
+                  ProductinfoItemWidget(
+                    Dish: 'Schezwan Noodles',
+                    price: '70',
+                  ),
+                ],
+              ),
+
+
             ],
           ),
-        ),
-        bottomNavigationBar: CustomBottomBar(
-          onChanged: (BottomBarEnum type) {
-            Navigator.pushNamed(
-              navigatorKey.currentContext!,
-              getCurrentRoute(type),
-            );
-          },
-        ),
-      ),
+            bottomNavigationBar:
+            CustomBottomBar(onChanged: (BottomBarEnum type) {
+              Navigator.pushNamed(
+                  navigatorKey.currentContext!, getCurrentRoute(type));
+            })
+        )
     );
   }
 
@@ -276,9 +342,9 @@ class MenuScreen extends StatelessWidget {
   Widget getCurrentPage(String currentRoute) {
     switch (currentRoute) {
       case AppRoutes.androidLargeThirtyonePage:
-        return AndroidLargeThirtyonePage();
+        return ApplicationHistoryFullScreen();
       case AppRoutes.androidLargeFifteenPage:
-        return AndroidLargeFifteenPage();
+        return OrdersScreen();
       default:
         return DefaultWidget();
     }
@@ -286,5 +352,41 @@ class MenuScreen extends StatelessWidget {
 
   void onTapImgArrowleftone(BuildContext context) {
     Navigator.pop(context);
+  }
+
+  Future chooseFile() async {
+    final pickedFile = await ImagePicker().pickImage(source: ImageSource.gallery);
+
+    setState(() {
+      _image = File(pickedFile!.path);
+    });
+  }
+
+  Future uploadFile() async {
+
+    firebase_storage.Reference storageReference = firebase_storage.FirebaseStorage.instance
+        .ref()
+        .child('images/${Path.basename(_image!.path)}');
+
+    firebase_storage.UploadTask uploadTask = storageReference.putFile(_image!);
+
+    await uploadTask.whenComplete(() async {
+      print('File Uploaded');
+      storageReference.getDownloadURL().then((fileURL) {
+        setState(() {
+          if(fileURL != null && priceController != null && dishController != null) {
+            _uploadedFileURL = fileURL;
+            firebaseService.addMenuItem(dishController.text, priceController.text, _uploadedFileURL);
+          }
+        });
+      });
+    });
+  }
+
+  void clearSelection() {
+    setState(() {
+      _image = null;
+      _uploadedFileURL = null;
+    });
   }
 }

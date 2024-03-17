@@ -1,6 +1,6 @@
 import 'package:dineconnect/core/app_export.dart';
-import 'package:dineconnect/presentation/android_large_fifteen_page/android_large_fifteen_page.dart';
-import 'package:dineconnect/presentation/android_large_thirtyone_page/android_large_thirtyone_page.dart';
+import 'package:dineconnect/presentation/application_history_full_screen/application_history_full_Screen.dart';
+import 'package:dineconnect/presentation/orders_screen/orders_screen.dart';
 import 'package:dineconnect/widgets/custom_bottom_bar.dart';
 import 'package:dineconnect/widgets/custom_elevated_button.dart';
 import 'package:dineconnect/widgets/custom_icon_button.dart';
@@ -8,8 +8,8 @@ import 'package:dineconnect/widgets/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
 
 // ignore_for_file: must_be_immutable
-class AndroidLargeThirtyOneScreen extends StatelessWidget {
-  AndroidLargeThirtyOneScreen({Key? key}) : super(key: key);
+class SingleApplicationScreen extends StatelessWidget {
+  SingleApplicationScreen({Key? key}) : super(key: key);
 
   GlobalKey<NavigatorState> navigatorKey = GlobalKey();
 
@@ -23,7 +23,7 @@ class AndroidLargeThirtyOneScreen extends StatelessWidget {
             resizeToAvoidBottomInset: false,
             body: Container(
                 width: double.maxFinite,
-                padding: EdgeInsets.only(top: 96.v),
+                padding: EdgeInsets.only(top: 20),
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -138,9 +138,9 @@ class AndroidLargeThirtyOneScreen extends StatelessWidget {
   Widget getCurrentPage(String currentRoute) {
     switch (currentRoute) {
       case AppRoutes.androidLargeThirtyonePage:
-        return AndroidLargeThirtyonePage();
+        return ApplicationHistoryFullScreen();
       case AppRoutes.androidLargeFifteenPage:
-        return AndroidLargeFifteenPage();
+        return OrdersScreen();
       default:
         return DefaultWidget();
     }

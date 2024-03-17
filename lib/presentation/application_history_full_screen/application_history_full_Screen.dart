@@ -1,12 +1,12 @@
-import '../android_large_thirtyone_page/widgets/listmainchef_item_widget.dart';
+import '../application_history_full_screen/widgets/listmainchef_item_widget.dart';
 import 'package:dineconnect/core/app_export.dart';
 import 'package:dineconnect/widgets/app_bar/appbar_image.dart';
 import 'package:dineconnect/widgets/app_bar/appbar_subtitle.dart';
 import 'package:dineconnect/widgets/app_bar/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 
-class AndroidLargeThirtyonePage extends StatelessWidget {
-  const AndroidLargeThirtyonePage({Key? key}) : super(key: key);
+class ApplicationHistoryFullScreen extends StatelessWidget {
+  const ApplicationHistoryFullScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

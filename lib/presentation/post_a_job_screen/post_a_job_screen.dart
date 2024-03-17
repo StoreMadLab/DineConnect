@@ -1,10 +1,12 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dineconnect/core/app_export.dart';
-import 'package:dineconnect/presentation/android_large_fifteen_page/android_large_fifteen_page.dart';
-import 'package:dineconnect/presentation/android_large_thirtyone_page/android_large_thirtyone_page.dart';
+import 'package:dineconnect/presentation/application_history_full_screen/application_history_full_Screen.dart';
+import 'package:dineconnect/presentation/orders_screen/orders_screen.dart';
 import 'package:dineconnect/services/firebase_service.dart';
 import 'package:dineconnect/widgets/custom_bottom_bar.dart';
 import 'package:dineconnect/widgets/custom_elevated_button.dart';
 import 'package:dineconnect/widgets/custom_text_form_field.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 
@@ -168,9 +170,9 @@ class PostAJobScreen extends StatelessWidget {
   Widget getCurrentPage(String currentRoute) {
     switch (currentRoute) {
       case AppRoutes.androidLargeThirtyonePage:
-        return AndroidLargeThirtyonePage();
+        return ApplicationHistoryFullScreen();
       case AppRoutes.androidLargeFifteenPage:
-        return AndroidLargeFifteenPage();
+        return OrdersScreen();
       default:
         return DefaultWidget();
     }
@@ -198,19 +200,41 @@ class PostAJobScreen extends StatelessWidget {
     workinghours = workingtimeController.text;
     location = locationController.text;
 
-    DatabaseReference usersRef = FirebaseDatabase.instance.ref().child("jobs_post");
+    try {
 
-    phoneNumber = firebaseService.getPhoneNumber()!;
+      // Validate if any of the fields are empty
+      if (hotelName.isEmpty ||
+          employeeRole.isEmpty ||
+          jobDescription.isEmpty ||
+          salary.isEmpty ||
+          workinghours.isEmpty||
+          location.isEmpty
+      ) {
+        // Show an error message or handle it accordingly
+        return;
+      }
 
-    await usersRef.child(phoneNumber).set({
-      "hotelName": hotelName,
-      "employeeRole": employeeRole,
-      "jobDescription": jobDescription,
-      "salary": salary,
-      "workinghours": workinghours,
-      "location": location,
-      "status" : "true",
-    });
+      final phoneNumber = FirebaseAuth.instance.currentUser?.phoneNumber;
+
+      final CollectionReference ordersCollection =
+      FirebaseFirestore.instance.collection('jobs_post');
+
+
+      await ordersCollection.doc(phoneNumber).collection('job_data').add({
+          "hotelName": hotelName,
+          "employeeRole": employeeRole,
+          "jobDescription": jobDescription,
+          "salary": salary,
+          "workinghours": workinghours,
+          "location": location,
+          "status" : "true",
+      });
+
+
+    } catch (e) {
+      // Handle errors
+      print('Error adding order: $e');
+    }
 
     Navigator.pushNamed(context, AppRoutes.manageJobsScreen);
   }

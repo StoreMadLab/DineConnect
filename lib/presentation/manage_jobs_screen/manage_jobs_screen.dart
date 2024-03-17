@@ -3,12 +3,12 @@ import 'package:dineconnect/services/firebase_service.dart';
 import 'package:dineconnect/services/job_posting.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:tuple/tuple.dart';
 
 import '../../widgets/custom_elevated_button.dart';
 import '../manage_jobs_screen/widgets/listchef_item_widget.dart';
 import 'package:dineconnect/core/app_export.dart';
-import 'package:dineconnect/presentation/android_large_fifteen_page/android_large_fifteen_page.dart';
-import 'package:dineconnect/presentation/android_large_thirtyone_page/android_large_thirtyone_page.dart';
+import 'package:dineconnect/presentation/application_history_full_screen/application_history_full_Screen.dart';
 import 'package:dineconnect/widgets/app_bar/appbar_image.dart';
 import 'package:dineconnect/widgets/app_bar/appbar_subtitle.dart';
 import 'package:dineconnect/widgets/app_bar/custom_app_bar.dart';
@@ -64,7 +64,8 @@ class _ManageJobsScreenState extends State<ManageJobsScreen> {
             margin: EdgeInsets.only(left: 11.h),
           ),
         ),
-        body: FutureBuilder<List<JobPosting>>(
+        //
+        body: FutureBuilder<List<Tuple2<String, JobPosting>>>(
           future: firebaseService.fetchJobPostings(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
@@ -74,29 +75,35 @@ class _ManageJobsScreenState extends State<ManageJobsScreen> {
             } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
               return Center(child: Text('No jobs posted.'));
             } else {
-              List<JobPosting> jobPostings = snapshot.data!;
-
+              List<Tuple2<String, JobPosting>> tuples = snapshot.data!;
 
               return ListView.builder(
-                itemCount: jobPostings.length,
+                itemCount: tuples.length,
                 itemBuilder: (context, index) {
+                  String jobId = tuples[index].item1;
+                  JobPosting jobPosting = tuples[index].item2;
+
                   return JobItemWidget(
-                    jobPosting: jobPostings[index],
+                    jobPosting: jobPosting,
                     onTapEdit: () {
                       // Handle edit button click
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => EditJobsScreen(jobPosting: jobPostings[index]),
+                          builder: (context) => EditJobsScreen(jobId: jobId, jobPosting: jobPosting),
                         ),
                       );
-                    }, jobRole: jobPostings[index].employeeRole, salary: jobPostings[index].salary, workHours: jobPostings[index].workingHours,
+                    },
+                    jobRole: jobPosting.employeeRole,
+                    salary: jobPosting.salary,
+                    workHours: jobPosting.workingHours,
                   );
                 },
               );
             }
           },
         ),
+
         bottomNavigationBar: CustomBottomBar(
           onChanged: (BottomBarEnum type) {
             Navigator.pushNamed(context, getCurrentRoute(type));

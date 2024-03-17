@@ -1,7 +1,8 @@
-import '../android_large_four_screen/widgets/userprofile_item_widget.dart';
+import 'package:dineconnect/presentation/home_screen/home_screen.dart';
+
+import '../browse_jobs/widgets/userprofile_item_widget.dart';
 import 'package:dineconnect/core/app_export.dart';
-import 'package:dineconnect/presentation/android_large_fifteen_page/android_large_fifteen_page.dart';
-import 'package:dineconnect/presentation/android_large_thirtyone_page/android_large_thirtyone_page.dart';
+import 'package:dineconnect/presentation/application_history_full_screen/application_history_full_Screen.dart';
 import 'package:dineconnect/widgets/app_bar/appbar_image_1.dart';
 import 'package:dineconnect/widgets/app_bar/appbar_subtitle.dart';
 import 'package:dineconnect/widgets/app_bar/custom_app_bar.dart';
@@ -10,8 +11,8 @@ import 'package:dineconnect/widgets/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
 
 // ignore_for_file: must_be_immutable
-class AndroidLargeFourScreen extends StatelessWidget {
-  AndroidLargeFourScreen({Key? key}) : super(key: key);
+class BrowseJobsScreen extends StatelessWidget {
+  BrowseJobsScreen({Key? key}) : super(key: key);
 
   GlobalKey<NavigatorState> navigatorKey = GlobalKey();
 
@@ -23,30 +24,13 @@ class AndroidLargeFourScreen extends StatelessWidget {
     return SafeArea(
         child: Scaffold(
             resizeToAvoidBottomInset: false,
-            appBar: CustomAppBar(
-                height: 91.v,
-                centerTitle: true,
-                title: Column(children: [
-                  Padding(
-                      padding: EdgeInsets.only(left: 13.h, right: 185.h),
-                      child: Row(children: [
-                        AppbarImage1(
-                            svgPath: ImageConstant.imgArrowleft,
-                            margin: EdgeInsets.only(top: 5.v),
-                            onTap: () {
-                              onTapArrowleftone(context);
-                            }),
-                        AppbarSubtitle(
-                            text: "Browse Job",
-                            margin: EdgeInsets.only(left: 18.h))
-                      ])),
-                  SizedBox(height: 16.v),
-                  Align(
-                      alignment: Alignment.centerLeft,
-                      child:
-                          SizedBox(width: double.maxFinite, child: Divider()))
-                ]),
-                styleType: Style.bgFill),
+            appBar: AppBar(
+              title: Text("Browse Jobs",
+              style: TextStyle(
+                color: Colors.black
+              ),
+              ),
+            ),
             body: SizedBox(
                 width: double.maxFinite,
                 child: Column(children: [
@@ -118,9 +102,9 @@ class AndroidLargeFourScreen extends StatelessWidget {
   Widget getCurrentPage(String currentRoute) {
     switch (currentRoute) {
       case AppRoutes.androidLargeThirtyonePage:
-        return AndroidLargeThirtyonePage();
+        return ApplicationHistoryFullScreen();
       case AppRoutes.androidLargeFifteenPage:
-        return AndroidLargeFifteenPage();
+        return HomeScreen();
       default:
         return DefaultWidget();
     }

@@ -1,7 +1,8 @@
+import 'package:dineconnect/presentation/home_screen/home_screen.dart';
+
 import '../application_screen/widgets/userprofile1_item_widget.dart';
 import 'package:dineconnect/core/app_export.dart';
-import 'package:dineconnect/presentation/android_large_fifteen_page/android_large_fifteen_page.dart';
-import 'package:dineconnect/presentation/android_large_thirtyone_page/android_large_thirtyone_page.dart';
+import 'package:dineconnect/presentation/application_history_full_screen/application_history_full_Screen.dart';
 import 'package:dineconnect/widgets/custom_bottom_bar.dart';
 import 'package:flutter/material.dart';
 
@@ -52,7 +53,7 @@ class ApplicationScreen extends StatelessWidget {
                               separatorBuilder: (context, index) {
                                 return Padding(
                                     padding:
-                                        EdgeInsets.all(20.0,),
+                                        EdgeInsets.all(10.0,),
                                     child: SizedBox(
                                         width: double.maxFinite,
                                         child: Divider(
@@ -62,10 +63,13 @@ class ApplicationScreen extends StatelessWidget {
                               },
                               itemCount: 3,
                               itemBuilder: (context, index) {
-                                return Userprofile1ItemWidget(
-                                    onTapUserprofile: () {
-                                  onTapUserprofile(context);
-                                });
+                                return Padding(
+                                  padding: const EdgeInsets.only(left: 10,right: 10,top: 5, bottom: 5),
+                                  child: Userprofile1ItemWidget(
+                                      onTapUserprofile: () {
+                                    onTapUserprofile(context);
+                                  }),
+                                );
                               }))
                     ])),
             bottomNavigationBar:
@@ -95,9 +99,9 @@ class ApplicationScreen extends StatelessWidget {
   Widget getCurrentPage(String currentRoute) {
     switch (currentRoute) {
       case AppRoutes.androidLargeThirtyonePage:
-        return AndroidLargeThirtyonePage();
+        return ApplicationHistoryFullScreen();
       case AppRoutes.androidLargeFifteenPage:
-        return AndroidLargeFifteenPage();
+        return HomeScreen();
       default:
         return DefaultWidget();
     }

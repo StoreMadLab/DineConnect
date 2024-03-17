@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dineconnect/core/app_export.dart';
 import 'package:dineconnect/core/utils/utils.dart';
 import 'package:dineconnect/widgets/custom_elevated_button.dart';
@@ -20,6 +21,8 @@ class CreateAccountScreen extends StatelessWidget {
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   FirebaseAuth _auth = FirebaseAuth.instance;
+
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   //text field
   String name = "";
@@ -187,15 +190,62 @@ class CreateAccountScreen extends StatelessWidget {
   /// The [BuildContext] parameter is used to build the navigation stack.
   /// When the action is triggered, this function uses the [Navigator] widget
   /// to push the named route for the androidLargeTwentyfourScreen.
+  // onTapRegister(BuildContext context) async {
+  //   name = fullNameController.text;
+  //   phone = phoneNumberController.text;
+  //   location = locationController.text;
+  //
+  //   if (_formKey.currentState!.validate()) {
+  //     DatabaseReference usersRef = FirebaseDatabase.instance.ref().child("users");
+  //     DatabaseEvent databaseEvent = await usersRef.child(phone).once();
+  //     if (databaseEvent.snapshot.value != null) {
+  //       // User with the phone number already exists
+  //       Utils().toastMessage("Account already registered");
+  //       Navigator.pushNamed(context, AppRoutes.loginScreen); // Navigate to login screen
+  //     } else {
+  //       try {
+  //         _auth.verifyPhoneNumber(
+  //           phoneNumber: phone,
+  //           verificationCompleted: (_) {},
+  //           verificationFailed: (e) {
+  //             Utils().toastMessage(e.toString());
+  //           },
+  //           codeSent: (String verificationId, int? token) async {
+  //             // Save user details to the database
+  //             await usersRef.child(phone).set({
+  //               "fullName": name,
+  //               "phoneNumber": phone,
+  //               "location": location,
+  //             });
+  //
+  //             Navigator.push(
+  //               context,
+  //               MaterialPageRoute(
+  //                 builder: (context) => OtpScreen(verificationId: verificationId, phoneNumber: phone,),
+  //               ),
+  //             );
+  //           },
+  //           codeAutoRetrievalTimeout: (e) {
+  //             Utils().toastMessage(e.toString());
+  //           },
+  //         );
+  //       } catch (e) {
+  //         Utils().toastMessage(e.toString());
+  //       }
+  //     }
+  //   }
+  // }
+
   onTapRegister(BuildContext context) async {
-    name = fullNameController.text;
-    phone = phoneNumberController.text;
-    location = locationController.text;
+    String name = fullNameController.text;
+    String phone = phoneNumberController.text;
+    String location = locationController.text;
 
     if (_formKey.currentState!.validate()) {
-      DatabaseReference usersRef = FirebaseDatabase.instance.ref().child("users");
-      DatabaseEvent databaseEvent = await usersRef.child(phone).once();
-      if (databaseEvent.snapshot.value != null) {
+      CollectionReference usersRef = FirebaseFirestore.instance.collection('users');
+      DocumentSnapshot docSnap = await usersRef.doc(phone).get();
+
+      if (docSnap.exists) {
         // User with the phone number already exists
         Utils().toastMessage("Account already registered");
         Navigator.pushNamed(context, AppRoutes.loginScreen); // Navigate to login screen
@@ -209,7 +259,7 @@ class CreateAccountScreen extends StatelessWidget {
             },
             codeSent: (String verificationId, int? token) async {
               // Save user details to the database
-              await usersRef.child(phone).set({
+              await usersRef.doc(phone).set({
                 "fullName": name,
                 "phoneNumber": phone,
                 "location": location,
@@ -232,6 +282,7 @@ class CreateAccountScreen extends StatelessWidget {
       }
     }
   }
+
 
 
 

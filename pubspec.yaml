@@ -20,12 +20,16 @@ dependencies:
   flutter_toastr: ^1.0.3
   fluttertoast: ^8.2.2
   firebase_database: ^10.2.7
+  image_picker: ^1.0.7
+  path_provider: ^2.1.2
+  path: ^1.8.3
+  tuple: ^2.0.2
 dev_dependencies: 
   flutter_test: 
     sdk: flutter
 flutter: 
   uses-material-design: true
-  assets: 
+  assets:
     - assets/
     - assets/images/
   fonts: 

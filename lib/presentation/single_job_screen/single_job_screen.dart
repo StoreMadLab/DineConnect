@@ -1,13 +1,13 @@
 import 'package:dineconnect/core/app_export.dart';
-import 'package:dineconnect/presentation/android_large_fifteen_page/android_large_fifteen_page.dart';
-import 'package:dineconnect/presentation/android_large_thirtyone_page/android_large_thirtyone_page.dart';
+import 'package:dineconnect/presentation/application_history_full_screen/application_history_full_Screen.dart';
+import 'package:dineconnect/presentation/orders_screen/orders_screen.dart';
 import 'package:dineconnect/widgets/custom_bottom_bar.dart';
 import 'package:dineconnect/widgets/custom_elevated_button.dart';
 import 'package:flutter/material.dart';
 
 // ignore_for_file: must_be_immutable
-class AndroidLargeTwentyeightScreen extends StatelessWidget {
-  AndroidLargeTwentyeightScreen({Key? key}) : super(key: key);
+class SingleJobScreen extends StatelessWidget {
+  SingleJobScreen({Key? key}) : super(key: key);
 
   GlobalKey<NavigatorState> navigatorKey = GlobalKey();
 
@@ -236,9 +236,9 @@ class AndroidLargeTwentyeightScreen extends StatelessWidget {
   Widget getCurrentPage(String currentRoute) {
     switch (currentRoute) {
       case AppRoutes.androidLargeThirtyonePage:
-        return AndroidLargeThirtyonePage();
+        return ApplicationHistoryFullScreen();
       case AppRoutes.androidLargeFifteenPage:
-        return AndroidLargeFifteenPage();
+        return OrdersScreen();
       default:
         return DefaultWidget();
     }
@@ -250,6 +250,6 @@ class AndroidLargeTwentyeightScreen extends StatelessWidget {
   /// When the action is triggered, this function uses the [Navigator] widget
   /// to push the named route for the androidLargeTwentynineScreen.
   onTapApplynow(BuildContext context) {
-    Navigator.pushNamed(context, AppRoutes.androidLargeTwentynineScreen);
+    Navigator.pushNamed(context, AppRoutes.applyNowScreen);
   }
 }

@@ -20,10 +20,7 @@ class Userprofile1ItemWidget extends StatelessWidget {
         onTapUserprofile?.call();
       },
       child: Container(
-        padding: EdgeInsets.symmetric(
-          horizontal: 7.h,
-          vertical: 9.v,
-        ),
+        padding: EdgeInsets.symmetric(horizontal: 7.h, vertical: 9.v,),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
           color: Colors.blue.shade200

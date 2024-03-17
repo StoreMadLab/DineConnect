@@ -3,7 +3,16 @@ import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
 class ProductinfoItemWidget extends StatelessWidget {
-  const ProductinfoItemWidget({Key? key})
+
+  final String Dish;
+  final String price;
+  const ProductinfoItemWidget(
+      {
+        Key? key,
+        required this.Dish,
+        required this.price
+      }
+      )
       : super(
           key: key,
         );
@@ -53,7 +62,7 @@ class ProductinfoItemWidget extends StatelessWidget {
                   Align(
                     alignment: Alignment.bottomCenter,
                     child: Text(
-                      "chi-Noodles",
+                      Dish,
                       style: CustomTextStyles.bodySmallInter,
                     ),
                   ),
@@ -68,7 +77,7 @@ class ProductinfoItemWidget extends StatelessWidget {
               ),
               decoration: AppDecoration.fillGray,
               child: Text(
-                "50rs",
+                price+"rs",
                 style: CustomTextStyles.bodySmallInter,
               ),
             ),

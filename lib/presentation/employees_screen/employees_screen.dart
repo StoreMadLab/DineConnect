@@ -1,7 +1,9 @@
-import '../android_large_eighteen_screen/widgets/userprofile2_item_widget.dart';
+import 'package:dineconnect/presentation/orders_screen/orders_screen.dart';
+
+import '../employees_screen/widgets/userprofile2_item_widget.dart';
 import 'package:dineconnect/core/app_export.dart';
-import 'package:dineconnect/presentation/android_large_fifteen_page/android_large_fifteen_page.dart';
-import 'package:dineconnect/presentation/android_large_thirtyone_page/android_large_thirtyone_page.dart';
+
+import 'package:dineconnect/presentation/application_history_full_screen/application_history_full_Screen.dart';
 import 'package:dineconnect/widgets/app_bar/appbar_image_1.dart';
 import 'package:dineconnect/widgets/app_bar/custom_app_bar.dart';
 import 'package:dineconnect/widgets/custom_bottom_bar.dart';
@@ -9,8 +11,8 @@ import 'package:dineconnect/widgets/custom_elevated_button.dart';
 import 'package:flutter/material.dart';
 
 // ignore_for_file: must_be_immutable
-class AndroidLargeEighteenScreen extends StatelessWidget {
-  AndroidLargeEighteenScreen({Key? key}) : super(key: key);
+class EmployeesScreen extends StatelessWidget {
+  EmployeesScreen({Key? key}) : super(key: key);
 
   GlobalKey<NavigatorState> navigatorKey = GlobalKey();
 
@@ -49,7 +51,7 @@ class AndroidLargeEighteenScreen extends StatelessWidget {
                       Divider(),
                       Expanded(
                           child: Align(
-                              alignment: Alignment.center,
+                              alignment: Alignment.topCenter,
                               child: Padding(
                                   padding: EdgeInsets.only(
                                       left: 20.h, top: 14.v, right: 20.h),
@@ -62,8 +64,12 @@ class AndroidLargeEighteenScreen extends StatelessWidget {
                                       itemCount: 2,
                                       itemBuilder: (context, index) {
                                         return Userprofile2ItemWidget();
-                                      })))),
-                      Spacer(),
+                                      }
+                                      )
+                              )
+                          )
+                      ),
+                      // Spacer(),
                       Divider(),
                       CustomElevatedButton(
                           width: 126.h,
@@ -101,9 +107,9 @@ class AndroidLargeEighteenScreen extends StatelessWidget {
   Widget getCurrentPage(String currentRoute) {
     switch (currentRoute) {
       case AppRoutes.androidLargeThirtyonePage:
-        return AndroidLargeThirtyonePage();
+        return ApplicationHistoryFullScreen();
       case AppRoutes.androidLargeFifteenPage:
-        return AndroidLargeFifteenPage();
+        return OrdersScreen();
       default:
         return DefaultWidget();
     }

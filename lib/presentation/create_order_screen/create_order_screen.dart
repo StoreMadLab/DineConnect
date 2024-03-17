@@ -1,6 +1,7 @@
 import 'package:dineconnect/core/app_export.dart';
-import 'package:dineconnect/presentation/android_large_fifteen_page/android_large_fifteen_page.dart';
-import 'package:dineconnect/presentation/android_large_thirtyone_page/android_large_thirtyone_page.dart';
+import 'package:dineconnect/presentation/application_history_full_screen/application_history_full_Screen.dart';
+import 'package:dineconnect/presentation/home_screen/home_screen.dart';
+import 'package:dineconnect/presentation/orders_screen/orders_screen.dart';
 import 'package:dineconnect/widgets/app_bar/appbar_image_1.dart';
 import 'package:dineconnect/widgets/app_bar/custom_app_bar.dart';
 import 'package:dineconnect/widgets/custom_bottom_bar.dart';
@@ -24,30 +25,29 @@ class AndroidLargeSeventeenScreen extends StatelessWidget {
                 title: AppbarImage1(
                     imagePath: ImageConstant.imgDineconnectlogosblack)),
             body: Container(
-                width: double.maxFinite,
-                padding: EdgeInsets.symmetric(vertical: 16.v),
+
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
-                          padding: EdgeInsets.only(left: 16.h, top: 6.v),
+                          padding: EdgeInsets.only(left: 6.h),
                           child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 CustomImageView(
                                     svgPath: ImageConstant.imgArrowleft,
-                                    height: 23.v,
-                                    width: 32.h,
-                                    margin: EdgeInsets.only(top: 5.v),
+                                    height: 30.v,
+                                    width: 31.h,
                                     onTap: () {
                                       onTapImgArrowleftone(context);
                                     }),
                                 Padding(
-                                    padding:
-                                        EdgeInsets.only(left: 9.h, bottom: 4.v),
+                                    padding: EdgeInsets.only(
+                                        left: 13.h, top: 4.v, bottom: 2.v),
                                     child: Text("Create Order",
                                         style: theme.textTheme.headlineSmall))
-                              ])),
+                              ]
+                          )
+                      ),
                       Divider(),
                       CustomElevatedButton(
                           height: 75.v,
@@ -446,9 +446,9 @@ class AndroidLargeSeventeenScreen extends StatelessWidget {
   Widget getCurrentPage(String currentRoute) {
     switch (currentRoute) {
       case AppRoutes.androidLargeThirtyonePage:
-        return AndroidLargeThirtyonePage();
+        return ApplicationHistoryFullScreen();
       case AppRoutes.androidLargeFifteenPage:
-        return AndroidLargeFifteenPage();
+        return OrdersScreen();
       default:
         return DefaultWidget();
     }

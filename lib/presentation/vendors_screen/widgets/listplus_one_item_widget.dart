@@ -1,12 +1,13 @@
 import 'package:dineconnect/core/app_export.dart';
+import 'package:dineconnect/widgets/custom_checkbox_button.dart';
 import 'package:dineconnect/widgets/custom_drop_down.dart';
 import 'package:dineconnect/widgets/custom_elevated_button.dart';
 import 'package:dineconnect/widgets/custom_icon_button.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
-class Userprofile2ItemWidget extends StatelessWidget {
-  Userprofile2ItemWidget({Key? key})
+class ListplusOneItemWidget extends StatelessWidget {
+  ListplusOneItemWidget({Key? key})
       : super(
           key: key,
         );
@@ -17,30 +18,36 @@ class Userprofile2ItemWidget extends StatelessWidget {
     "Item Three",
   ];
 
+  bool paid = false;
+
   @override
   Widget build(BuildContext context) {
     return Align(
       alignment: Alignment.center,
       child: Container(
         padding: EdgeInsets.symmetric(
-          horizontal: 13.h,
-          vertical: 10.v,
+          horizontal: 14.h,
+          vertical: 7.v,
         ),
         decoration: AppDecoration.fillOrange.copyWith(
           borderRadius: BorderRadiusStyle.roundedBorder30,
         ),
         child: Row(
-          crossAxisAlignment: CrossAxisAlignment.end,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: EdgeInsets.only(top: 13.v),
+              padding: EdgeInsets.only(
+                top: 16.v,
+                bottom: 42.v,
+              ),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   CustomIconButton(
                     height: 69.adaptSize,
                     width: 69.adaptSize,
                     padding: EdgeInsets.all(4.h),
-                    decoration: IconButtonStyleHelper.fillGrayTL20,
+                    decoration: IconButtonStyleHelper.fillGrayTL30,
                     child: CustomImageView(
                       svgPath: ImageConstant.imgPlusOnprimary,
                     ),
@@ -48,7 +55,7 @@ class Userprofile2ItemWidget extends StatelessWidget {
                   SizedBox(height: 11.v),
                   CustomElevatedButton(
                     height: 24.v,
-                    width: 73.h,
+                    width: 76.h,
                     text: "Delete",
                     buttonStyle: CustomButtonStyles.fillRedA,
                     buttonTextStyle: CustomTextStyles.bodyLargeNicoMoji,
@@ -58,20 +65,21 @@ class Userprofile2ItemWidget extends StatelessWidget {
             ),
             Padding(
               padding: EdgeInsets.only(
-                left: 14.h,
-                top: 13.v,
+                left: 7.h,
+                top: 16.v,
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(
-                    height: 23.v,
+                  Container(
+                    height: 22.v,
                     width: 178.h,
+                    margin: EdgeInsets.only(left: 3.h),
                     child: Stack(
                       alignment: Alignment.bottomLeft,
                       children: [
                         Align(
-                          alignment: Alignment.topCenter,
+                          alignment: Alignment.center,
                           child: Container(
                             height: 22.v,
                             width: 178.h,
@@ -85,7 +93,7 @@ class Userprofile2ItemWidget extends StatelessWidget {
                           child: Padding(
                             padding: EdgeInsets.only(left: 7.h),
                             child: Text(
-                              "EmpName1",
+                              "Vendor-name",
                               style: theme.textTheme.bodyLarge,
                             ),
                           ),
@@ -93,10 +101,13 @@ class Userprofile2ItemWidget extends StatelessWidget {
                       ],
                     ),
                   ),
-                  SizedBox(height: 1.v),
-                  SizedBox(
+                  Container(
                     height: 76.v,
                     width: 184.h,
+                    margin: EdgeInsets.only(
+                      left: 3.h,
+                      top: 2.v,
+                    ),
                     child: Stack(
                       alignment: Alignment.bottomLeft,
                       children: [
@@ -122,7 +133,7 @@ class Userprofile2ItemWidget extends StatelessWidget {
                               children: [
                                 SizedBox(height: 1.v),
                                 Text(
-                                  "22000rs P/m",
+                                  "300rs",
                                   style: theme.textTheme.bodyLarge,
                                 ),
                               ],
@@ -139,23 +150,24 @@ class Userprofile2ItemWidget extends StatelessWidget {
                             ),
                           ),
                         ),
-                        CustomImageView(
-                          svgPath: ImageConstant.imgArrowdownOnerror,
-                          height: 49.adaptSize,
-                          width: 49.adaptSize,
-                          alignment: Alignment.centerRight,
-                        ),
                         CustomDropDown(
                           width: 178.h,
                           hintText: "Select ",
                           alignment: Alignment.centerLeft,
                           items: dropdownItemList,
-                          contentPadding:
-                              EdgeInsets.symmetric(horizontal: 14.h),
                           onChanged: (value) {},
                         ),
                       ],
                     ),
+                  ),
+                  SizedBox(height: 11.v),
+                  CustomCheckboxButton(
+                    text: "PAID",
+                    value: paid,
+                    padding: EdgeInsets.fromLTRB(20.h, 7.v, 12.h, 7.v),
+                    onChange: (value) {
+                      paid = value;
+                    },
                   ),
                 ],
               ),
