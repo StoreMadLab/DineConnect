@@ -39,7 +39,8 @@ class CreateAccountScreen extends StatelessWidget {
                 key: _formKey,
                 child: SizedBox(
                     width: double.maxFinite,
-                    child: Column(children: [
+                    child: Column(
+                        children: [
                       SizedBox(height: 76.v),
                       Expanded(
                           child: SingleChildScrollView(
@@ -185,56 +186,6 @@ class CreateAccountScreen extends StatelessWidget {
                     ])))));
   }
 
-  /// Navigates to the androidLargeTwentyfourScreen when the action is triggered.
-  ///
-  /// The [BuildContext] parameter is used to build the navigation stack.
-  /// When the action is triggered, this function uses the [Navigator] widget
-  /// to push the named route for the androidLargeTwentyfourScreen.
-  // onTapRegister(BuildContext context) async {
-  //   name = fullNameController.text;
-  //   phone = phoneNumberController.text;
-  //   location = locationController.text;
-  //
-  //   if (_formKey.currentState!.validate()) {
-  //     DatabaseReference usersRef = FirebaseDatabase.instance.ref().child("users");
-  //     DatabaseEvent databaseEvent = await usersRef.child(phone).once();
-  //     if (databaseEvent.snapshot.value != null) {
-  //       // User with the phone number already exists
-  //       Utils().toastMessage("Account already registered");
-  //       Navigator.pushNamed(context, AppRoutes.loginScreen); // Navigate to login screen
-  //     } else {
-  //       try {
-  //         _auth.verifyPhoneNumber(
-  //           phoneNumber: phone,
-  //           verificationCompleted: (_) {},
-  //           verificationFailed: (e) {
-  //             Utils().toastMessage(e.toString());
-  //           },
-  //           codeSent: (String verificationId, int? token) async {
-  //             // Save user details to the database
-  //             await usersRef.child(phone).set({
-  //               "fullName": name,
-  //               "phoneNumber": phone,
-  //               "location": location,
-  //             });
-  //
-  //             Navigator.push(
-  //               context,
-  //               MaterialPageRoute(
-  //                 builder: (context) => OtpScreen(verificationId: verificationId, phoneNumber: phone,),
-  //               ),
-  //             );
-  //           },
-  //           codeAutoRetrievalTimeout: (e) {
-  //             Utils().toastMessage(e.toString());
-  //           },
-  //         );
-  //       } catch (e) {
-  //         Utils().toastMessage(e.toString());
-  //       }
-  //     }
-  //   }
-  // }
 
   onTapRegister(BuildContext context) async {
     String name = fullNameController.text;

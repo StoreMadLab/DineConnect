@@ -1,3 +1,4 @@
+import 'package:dineconnect/presentation/employees_screen/add_employee_screen.dart';
 import 'package:dineconnect/presentation/orders_screen/orders_screen.dart';
 
 import '../employees_screen/widgets/userprofile2_item_widget.dart';
@@ -72,6 +73,9 @@ class EmployeesScreen extends StatelessWidget {
                       // Spacer(),
                       Divider(),
                       CustomElevatedButton(
+                          onTap: () {
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => AddEmployee()));
+                          },
                           width: 126.h,
                           text: "ADD",
                           margin: EdgeInsets.only(

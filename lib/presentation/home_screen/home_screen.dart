@@ -27,23 +27,6 @@ class _HomeScreenState extends State<HomeScreen> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   String? uid = "";
 
-  // Future<String?> fetchUserDataFromFirebase(String phoneNumber) async {
-  //   final databaseReference = FirebaseDatabase.instance.ref();
-  //   final userRef = databaseReference.child('users/$phoneNumber/fullName');
-  //
-  //   try {
-  //     DatabaseEvent databaseEvent = await userRef.once();
-  //     if (databaseEvent.snapshot.value != null) {
-  //       return databaseEvent.snapshot.value.toString();
-  //     } else {
-  //       return null;
-  //     }
-  //   } catch (e) {
-  //     print('Error fetching user data: $e');
-  //     return null;
-  //   }
-  // }
-
   @override
   void initState() {
     super.initState();
@@ -74,8 +57,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-
-
     mediaQueryData = MediaQuery.of(context);
     return Scaffold(
       appBar: AppBar(

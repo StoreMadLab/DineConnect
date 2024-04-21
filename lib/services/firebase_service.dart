@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dineconnect/classes/dish.dart';
 import 'package:dineconnect/services/job_posting.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -384,6 +385,31 @@ class FirebaseService {
     }
   }
 
+//fetch dishes
+  Future<List<Dish>> fetchMenuItems() async {
+    try {
+      final phoneNumber = FirebaseAuth.instance.currentUser?.phoneNumber;
+      final CollectionReference menuCollection = FirebaseFirestore.instance.collection('menuitem');
+
+      QuerySnapshot querySnapshot = await menuCollection.doc(phoneNumber).collection('menu').get();
+
+      List<Dish> menuItems = [];
+      querySnapshot.docs.forEach((doc) {
+        Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
+        Dish menuItem = Dish(
+          dish: data['dish'],
+          price: data['price'],
+          url: data['url'],
+        );
+        menuItems.add(menuItem);
+      });
+
+      return menuItems;
+    } catch (e) {
+      print('Error fetching menu items: $e');
+      return []; // Return an empty list in case of error
+    }
+  }
 
 
 }

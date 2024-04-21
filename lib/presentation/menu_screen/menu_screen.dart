@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:dineconnect/classes/dish.dart';
 import 'package:dineconnect/presentation/orders_screen/orders_screen.dart';
 import 'package:dineconnect/services/firebase_service.dart';
 import 'package:dineconnect/widgets/custom_text_form_field.dart';
@@ -24,6 +25,9 @@ class MenuScreen extends StatefulWidget {
 }
 
 class _MenuScreenState extends State<MenuScreen> {
+
+  List<Dish> menuItem = [];
+
   TextEditingController dishController = TextEditingController();
   TextEditingController priceController = TextEditingController();
   File? _image;
@@ -280,38 +284,48 @@ class _MenuScreenState extends State<MenuScreen> {
               Divider(),
               SizedBox(height: 10,),
 
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  ProductinfoItemWidget(
-                    Dish: 'Chi Noodles',
-                    price: '50',
+              Expanded(
+                child: SingleChildScrollView(
+                  physics: AlwaysScrollableScrollPhysics(),
+                  child: Column(
+                    children: [
+                      FutureBuilder<List<Dish>>(
+                        future: firebaseService.fetchMenuItems(),
+                        builder: (context, snapshot) {
+                          if (snapshot.connectionState == ConnectionState.waiting) {
+                            return Center(child: CircularProgressIndicator());
+                          } else if (snapshot.hasError) {
+                            return Center(child: Text('Error fetching menu items'));
+                          } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                            return Center(child: Text('No menu items available'));
+                          } else {
+                            List<Dish> menuItems = snapshot.data!;
+                            return Container(
+                              height: MediaQuery.of(context).size.height * 0.6,
+                              child: GridView.builder(
+                                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 2, // Two items per row
+                                  mainAxisSpacing: 5.0,
+                                  crossAxisSpacing: 5.0,
+                                  childAspectRatio: 1.2, // Aspect ratio of each item
+                                ),
+                                itemCount: menuItems.length,
+                                itemBuilder: (context, index) {
+                                  return ProductinfoItemWidget(
+                                    Dish: menuItems[index].dish,
+                                    price: menuItems[index].price,
+                                    url: menuItems[index].url,
+                                  );
+                                },
+                              ),
+                            );
+                          }
+                        },
+                      ),
+                    ],
                   ),
-
-                  ProductinfoItemWidget(
-                    Dish: 'Egg Noodles',
-                    price: '45',
-                  ),
-                ],
+                ),
               ),
-
-              SizedBox(height: 10,),
-
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  ProductinfoItemWidget(
-                    Dish: 'Veg Noodles',
-                    price: '40',
-                  ),
-
-                  ProductinfoItemWidget(
-                    Dish: 'Schezwan Noodles',
-                    price: '70',
-                  ),
-                ],
-              ),
-
 
             ],
           ),

@@ -6,11 +6,13 @@ class ProductinfoItemWidget extends StatelessWidget {
 
   final String Dish;
   final String price;
+  final String url;
   const ProductinfoItemWidget(
       {
         Key? key,
         required this.Dish,
-        required this.price
+        required this.price,
+        required this.url
       }
       )
       : super(
@@ -35,7 +37,8 @@ class ProductinfoItemWidget extends StatelessWidget {
           children: [
             SizedBox(height: 6.v),
             CustomImageView(
-              imagePath: ImageConstant.imgRectangle5370x70,
+              // imagePath: ImageConstant.imgRectangle5370x70,
+              url: url,
               height: 70.adaptSize,
               width: 70.adaptSize,
               radius: BorderRadius.circular(
