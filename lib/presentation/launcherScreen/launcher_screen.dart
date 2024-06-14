@@ -63,29 +63,10 @@ class LauncherScreen extends StatelessWidget {
                         ])))));
   }
 
-  /// Navigates to the androidLargeTwentythreeScreen when the action is triggered.
-  ///
-  /// The [BuildContext] parameter is used to build the navigation stack.
-  /// When the action is triggered, this function uses the [Navigator] widget
-  /// to push the named route for the androidLargeTwentythreeScreen.
-  // onTapImgDineconnectlogo(BuildContext context) {
-  //   Navigator.pushNamed(context, AppRoutes.androidLargeTwentythreeScreen);
-  // }
-
-  /// Navigates to the androidLargeThreeScreen when the action is triggered.
-  ///
-  /// The [BuildContext] parameter is used to build the navigation stack.
-  /// When the action is triggered, this function uses the [Navigator] widget
-  /// to push the named route for the androidLargeThreeScreen.
   onTapCreatean(BuildContext context) {
     Navigator.pushNamed(context, AppRoutes.createAccountScreen);
   }
 
-  /// Navigates to the androidLargeTwentythreeScreen when the action is triggered.
-  ///
-  /// The [BuildContext] parameter is used to build the navigation stack.
-  /// When the action is triggered, this function uses the [Navigator] widget
-  /// to push the named route for the androidLargeTwentythreeScreen.
   onTapLogin(BuildContext context) {
     Navigator.pushNamed(context, AppRoutes.loginScreen);
   }

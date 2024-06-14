@@ -176,42 +176,6 @@ class LoginScreen extends StatelessWidget {
                     ]))));
   }
 
-  /// Navigates to the androidLargeTwentyfourScreen when the action is triggered.
-  ///
-  /// The [BuildContext] parameter is used to build the navigation stack.
-  /// When the action is triggered, this function uses the [Navigator] widget
-  /// to push the named route for the androidLargeTwentyfourScreen.
-  // onTapRequestotp(BuildContext context) async {
-  //   String phone = mobileNoController.text;
-  //
-  //   DatabaseReference usersRef = FirebaseDatabase.instance.ref().child("users");
-  //   DatabaseEvent snapshot = await usersRef.child(phone).once();
-  //
-  //     if (snapshot.snapshot.value != null) {
-  //       // User exists, send OTP
-  //       _auth.verifyPhoneNumber(
-  //         phoneNumber: phone,
-  //         verificationCompleted: (_) {},
-  //         verificationFailed: (e) {
-  //           Utils().toastMessage(e.toString());
-  //         },
-  //         codeSent: (String verificationId, int? token) {
-  //           Navigator.push(
-  //             context,
-  //             MaterialPageRoute(
-  //               builder: (context) => OtpScreen(verificationId: verificationId, phoneNumber: phone,),
-  //             ),
-  //           );
-  //         },
-  //         codeAutoRetrievalTimeout: (e) {
-  //           Utils().toastMessage(e.toString());
-  //         },
-  //       );
-  //     } else {
-  //       // User doesn't exist, navigate to create account screen
-  //       Navigator.pushNamed(context, AppRoutes.createAccountScreen);
-  //     }
-  // }
 
 
   onTapRequestotp(BuildContext context) async {
@@ -246,17 +210,6 @@ class LoginScreen extends StatelessWidget {
     }
   }
 
-
-
-
-
-
-
-  /// Navigates to the androidLargeThreeScreen when the action is triggered.
-  ///
-  /// The [BuildContext] parameter is used to build the navigation stack.
-  /// When the action is triggered, this function uses the [Navigator] widget
-  /// to push the named route for the androidLargeThreeScreen.
   onTapTxtDonthaveanaccount(BuildContext context) {
     Navigator.pushNamed(context, AppRoutes.createAccountScreen);
   }
