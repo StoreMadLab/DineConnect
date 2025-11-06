@@ -55,7 +55,7 @@ It provides a smooth experience for managing restaurant operations and staffing 
 Below is a simplified architecture diagram of the DineConnect system:
 
 
-![Architecture](images/architecture.png)
+![Architecture](Images/architecture.png)
 
 ---
 
@@ -63,14 +63,14 @@ Below is a simplified architecture diagram of the DineConnect system:
 
 | Screen | Preview |
 |--------|----------|
-| **Main Screen** | ![Main Screen](images/main_screen.png) |
-| **Login / Signup** | ![Login Screen](images/login.png) |
-| **Home Screen** | ![Home Screen](images/home.png) |
-| **Post a Job** | ![Post Job](images/post_job.png) |
-| **Menu Management** | ![Menu Screen](images/menu.png) |
-| **Vendor Screen** | ![Vendor Screen](images/vendor.png) |
-| **Employee Management** | ![Employee Management](images/employee_management.png) |
-| **Order Management** | ![Order Screen](images/order.png) |
+| **Main Screen** | ![Main Screen](Images/main_screen.png) |
+| **Login / Signup** | ![Login Screen](Images/login.png) |
+| **Home Screen** | ![Home Screen](Images/home.png) |
+| **Post a Job** | ![Post Job](Images/post_job.png) |
+| **Menu Management** | ![Menu Screen](Images/menu.png) |
+| **Vendor Screen** | ![Vendor Screen](Images/vendor.png) |
+| **Employee Management** | ![Employee Management](Images/employee_management.png) |
+| **Order Management** | ![Order Screen](Images/order.png) |
 
 ---
 
