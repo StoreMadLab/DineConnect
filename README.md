@@ -1,59 +1,106 @@
+# 🍽️ DineConnect
 
-# dineconnect
-### Table of contents
-- [System requirements](#system-requirements)
-- [Figma design guidelines for better UI accuracy](#figma-design-guideline-for-better-accuracy)
-- [Check the UI of the entire app](#app-navigations)
-- [Application structure](#project-structure)
-- [How to format your code?](#how-you-can-do-code-formatting)
-- [How you can improve code readability?](#how-you-can-improve-the-readability-of-code)
-- [Libraries and tools used](#libraries-and-tools-used)
-- [Support](#support)
+**DineConnect** is a mobile application built using **Flutter** and **Firebase** that bridges the gap between hotel owners and job seekers in the hospitality industry.  
+It also allows hotel owners to efficiently manage restaurant operations such as **menus, orders, and employees** — all from a single app.
 
-### System requirements
+---
 
-Dart SDK Version 2.18.0 or greater.
-Flutter SDK Version 3.3.0 or greater.
+## 🚀 Overview
 
-### Figma design guidelines for better UI accuracy
+DineConnect serves as a unified platform for:
+- **Hotel Owners** – Hire employees, manage menus, and track orders.  
+- **Job Seekers** – Browse and apply for hotel-related job openings.  
 
-Read our guidelines to increase the accuracy of design-to-code conversion by optimizing Figma designs.
-https://docs.dhiwise.com/docs/Designguidelines/intro
+It provides a smooth experience for managing restaurant operations and staffing needs under one ecosystem.
 
-### Check the UI of the entire app
+---
 
-Check the UI of all the app screens from a single place by setting up the 'initialRoute'  to AppNavigation in the AppRoutes.dart file.
+## 🧠 Features
 
-### Application structure
-After successful build, your application structure should look like this:
-                    
-```
-.
-├── android                         - It contains files required to run the application on an Android platform.
-├── assets                          - It contains all images and fonts of your application.
-├── ios                             - It contains files required to run the application on an iOS platform.
-├── lib                             - Most important folder in the application, used to write most of the Dart code..
-    ├── main.dart                   - Starting point of the application
-    ├── core
-    │   ├── app_export.dart         - It contains commonly used file imports
-    │   ├── constants               - It contains static constant class file
-    │   └── utils                   - It contains common files and utilities of the application
-    ├── presentation                - It contains widgets of the screens
-    ├── routes                      - It contains all the routes of the application
-    └── theme                       - It contains app theme and decoration classes
-    └── widgets                     - It contains all custom widget classes
-```
-### How to format your code?
+✅ **User Authentication**
+- Firebase Authentication for secure login and signup.  
+- Separate login roles for hotel owners and employees.  
 
-- if your code is not formatted then run following command in your terminal to format code
-  ```
-  dart format .
-  ```
+✅ **Hotel Management**
+- Add and update restaurant menu items.  
+- Manage customer orders and track their status in real-time.  
 
-### How you can improve code readability?
+✅ **Employee Management**
+- Hire, view, and manage hotel staff.  
+- Post job openings directly from the app.  
 
-Resolve the errors and warnings that are shown in the application.
+✅ **Job Seeking**
+- Job seekers can view available hotel jobs and apply instantly.  
 
-### Support
+✅ **Interactive UI**
+- Designed using **Figma** for a modern, user-friendly experience.
 
-If you have any problems or questions, go to our Discord channel, where we will help you as quickly as possible: https://discord.com/invite/rFMnCG5MZ7
+---
+
+## 🛠️ Tech Stack
+
+| Technology | Purpose |
+|-------------|----------|
+| **Flutter** | Frontend UI development |
+| **Dart** | App logic and business layer |
+| **Firebase Authentication** | Secure login and signup |
+| **Firebase Firestore** | Real-time database for menus, jobs, and orders |
+| **Firebase Storage** | Image uploads and storage |
+| **Figma** | UI/UX design and prototyping |
+
+---
+
+## 🧩 System Architecture
+
+Below is a simplified architecture diagram of the DineConnect system:
+
+
+![Architecture](images/architecture.png)
+
+---
+
+## 📸 Screenshots
+
+| Screen | Preview |
+|--------|----------|
+| **Main Screen** | ![Main Screen](images/main_screen.png) |
+| **Login / Signup** | ![Login Screen](images/login.png) |
+| **Home Screen** | ![Home Screen](images/home.png) |
+| **Post a Job** | ![Post Job](images/post_job.png) |
+| **Menu Management** | ![Menu Screen](images/menu.png) |
+| **Vendor Screen** | ![Vendor Screen](images/vendor.png) |
+| **Employee Management** | ![Employee Management](images/employee_management.png) |
+| **Order Management** | ![Order Screen](images/order.png) |
+
+---
+
+## 👨‍💻 My Role
+
+I developed the **Flutter frontend** of DineConnect and integrated **Firebase Authentication** for secure user login and role-based access.
+
+---
+
+## 🎯 Future Enhancements
+
+- Integration of payment gateways for restaurant orders.  
+- Push notifications for new job postings and order updates.  
+- Dashboard analytics for hotel performance tracking.  
+- Employee attendance and shift management.
+
+---
+
+## 🧾 License
+
+This project is for educational and portfolio purposes.  
+Feel free to explore and build upon it with proper credit.
+
+---
+
+## 📞 Contact
+
+**Developer:** Prateek Kotian  
+📧 pckotian40@gmail.com
+
+---
+
+### 💬 “Connecting restaurants and talent, one click at a time.”  
